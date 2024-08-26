@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Use HashRouter for GitHub Pages
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './styles/globalStyles';
 import theme from './styles/theme';
@@ -11,7 +11,7 @@ import DiseaseClassification from './pages/Services/DiseaseClassification';
 import WaterResource from './pages/Services/WaterResource';
 import ChatBot from './pages/Services/ChatBot';
 import ContactUsPage from './pages/ContactUs/ContactUsPage';
-import AboutUsDetail from './pages/AboutUs/AboutUsDetail';  // Import the new detail page
+import AboutUsDetail from './pages/AboutUs/AboutUsDetail';
 
 function App() {
   return (
@@ -26,7 +26,9 @@ function App() {
           <Route path="/services/water-resource" element={<WaterResource />} />
           <Route path="/services/chatbot" element={<ChatBot />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
-          <Route path="/about-us-detail" element={<AboutUsDetail />} />  {/* Add the new route here */}
+          <Route path="/about-us-detail" element={<AboutUsDetail />} />
+          {/* Catch-all route for undefined paths */}
+          <Route path="*" element={<HomePage />} />
         </Routes>
         <Footer />
       </Router>
