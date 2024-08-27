@@ -8,12 +8,24 @@ import MarketLeaderSection from './MarketLeaderSection';
 function HomePage() {
   return (
     <div>
-      <HeroSection />
-      <ServicesSection />
-      <AboutUsSection />
-      <MeetOurFarmersSection />
-      <ContactUsSection />
-      <MarketLeaderSection />
+      <section id="home">
+        <HeroSection />
+      </section>
+      <section id="services">
+        <ServicesSection />
+      </section>
+      <section id="about">
+        <AboutUsSection />
+      </section>
+      <section id="farmers">
+        <MeetOurFarmersSection />
+      </section>
+      <section id="contact">
+        <ContactUsSection />
+      </section>
+      <section id="market">
+        <MarketLeaderSection />
+      </section>
     </div>
   );
 }

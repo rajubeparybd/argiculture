@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link as ScrollLink } from 'react-scroll'; // Import Link from react-scroll
+import { HashLink as RouterLink } from 'react-router-hash-link'; // Import HashLink from react-router-hash-link
 
 const NavBarContainer = styled.div`
   background-color: #ffffff;
@@ -36,6 +38,7 @@ const NavLink = styled.a`
   text-decoration: none;
   font-weight: 500;
   position: relative;
+  cursor: pointer;
 
   &:hover {
     color: #27ae60;
@@ -80,10 +83,18 @@ function NavBar() {
       <TopBar>
         <LogoText>AgriHelper</LogoText>
         <NavLinks>
-          <NavLink href="#">Home</NavLink>
-          <NavLink href="#">Services</NavLink>
-          <NavLink href="#">About</NavLink>
-          <NavLink href="#">Contact</NavLink>
+          <RouterLink to="/#home">
+            <NavLink>Home</NavLink>
+          </RouterLink>
+          <RouterLink to="/#services">
+            <NavLink>Services</NavLink>
+          </RouterLink>
+          <RouterLink to="/#about">
+            <NavLink>About</NavLink>
+          </RouterLink>
+          <RouterLink to="/#contact">
+            <NavLink>Contact</NavLink>
+          </RouterLink>
         </NavLinks>
       </TopBar>
     </NavBarContainer>
