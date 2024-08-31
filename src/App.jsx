@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Use HashRouter for GitHub Pages
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './styles/globalStyles';
 import theme from './styles/theme';
@@ -27,7 +27,6 @@ function App() {
           <Route path="/services/chatbot" element={<ChatBot />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/about-us-detail" element={<AboutUsDetail />} />
-          {/* Catch-all route for undefined paths */}
           <Route path="*" element={<HomePage />} />
         </Routes>
         <Footer />

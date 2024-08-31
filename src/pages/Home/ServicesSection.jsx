@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import cropSuggestionImg from '../../assets/images/crop-suggestion.jpg';  // Replace with the actual image paths
 import diseaseClassificationImg from '../../assets/images/disease-classification.jpg';  // Replace with the actual image paths
 import waterResourceImg from '../../assets/images/water-resource.jpg';  // Replace with the actual image paths
@@ -36,12 +38,13 @@ const ServicesGrid = styled.div`
   }
 `;
 
-const ServiceCard = styled.div`
+const ServiceCard = styled(Link)`  // Updated to use Link component
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
+  text-decoration: none;  // Ensure the link has no underline or color change
 
   &:hover {
     transform: translateY(-5px);
@@ -81,7 +84,7 @@ function ServicesSection() {
       <SectionSubtitle>Our Services</SectionSubtitle>
       <SectionTitle>What We Offer</SectionTitle>
       <ServicesGrid>
-        <ServiceCard>
+        <ServiceCard to="/services/crop-suggestion">  {/* Updated Link */}
           <ServiceImage src={cropSuggestionImg} alt="Crop Suggestion" />
           <ServiceContent>
             <ServiceTitle>Crop Suggestion</ServiceTitle>
@@ -91,7 +94,7 @@ function ServicesSection() {
             <ServiceIcon><i className="fas fa-seedling"></i></ServiceIcon>
           </ServiceContent>
         </ServiceCard>
-        <ServiceCard>
+        <ServiceCard to="/services/disease-classification">  {/* Updated Link */}
           <ServiceImage src={diseaseClassificationImg} alt="Disease Classification" />
           <ServiceContent>
             <ServiceTitle>Disease Classification</ServiceTitle>
@@ -101,7 +104,7 @@ function ServicesSection() {
             <ServiceIcon><i className="fas fa-diagnoses"></i></ServiceIcon>
           </ServiceContent>
         </ServiceCard>
-        <ServiceCard>
+        <ServiceCard to="/services/water-resource">  {/* Updated Link */}
           <ServiceImage src={waterResourceImg} alt="Water Resource Management" />
           <ServiceContent>
             <ServiceTitle>Water Resource Management</ServiceTitle>
@@ -111,7 +114,7 @@ function ServicesSection() {
             <ServiceIcon><i className="fas fa-water"></i></ServiceIcon>
           </ServiceContent>
         </ServiceCard>
-        <ServiceCard>
+        <ServiceCard to="/services/chatbot">  {/* Updated Link */}
           <ServiceImage src={chatBotImg} alt="ChatBot Assistance" />
           <ServiceContent>
             <ServiceTitle>ChatBot Assistance</ServiceTitle>

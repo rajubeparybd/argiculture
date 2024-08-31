@@ -1,29 +1,30 @@
+import React from "react";
 import styled from "styled-components";
-import farmer1Img from "../../assets/images/farmer1.jpg"; // Replace with the actual image paths
-import farmer2Img from "../../assets/images/farmer2.jpg"; // Replace with the actual image paths
-import farmer3Img from "../../assets/images/farmer3.jpg"; // Replace with the actual image paths
 
-const MeetOurFarmersContainer = styled.section`
-  padding: 80px 50px;
-  background-color: #f9f9f9;
+const TeamSection = styled.section`
+  padding: 60px 20px;
   text-align: center;
+  background-color: #f9f9f9;
 `;
 
-const SectionTitle = styled.h2`
+const TeamTitle = styled.h2`
   font-size: 36px;
-  color: #333;
   margin-bottom: 20px;
+  color: #333;
 `;
 
-const SectionSubtitle = styled.h3`
+const TeamSubtitle = styled.p`
   font-size: 18px;
   color: #777;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 `;
 
-const FarmersGrid = styled.div`
+const TeamGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(220px, 1fr)
+  ); /* Adjust grid to fit 5 members nicely */
   gap: 20px;
 
   @media (max-width: 768px) {
@@ -31,8 +32,8 @@ const FarmersGrid = styled.div`
   }
 `;
 
-const FarmerCard = styled.div`
-  background-color: #ffffff;
+const TeamCard = styled.div`
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -43,57 +44,73 @@ const FarmerCard = styled.div`
   }
 `;
 
-const FarmerImage = styled.img`
+const TeamImage = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
 `;
 
-const FarmerContent = styled.div`
+const TeamContent = styled.div`
   padding: 20px;
 `;
 
-const FarmerName = styled.h4`
-  font-size: 20px;
+const TeamName = styled.h4`
+  font-size: 22px;
   color: #333;
   margin-bottom: 10px;
 `;
 
-const FarmerTitle = styled.p`
+const TeamRole = styled.p`
   font-size: 16px;
   color: #777;
 `;
 
-function MeetOurFarmersSection() {
-  return (
-    <MeetOurFarmersContainer>
-      <SectionSubtitle>Team Members</SectionSubtitle>
-      <SectionTitle>Meet Our Farmers</SectionTitle>
-      <FarmersGrid>
-        <FarmerCard>
-          <FarmerImage src={farmer1Img} alt="Kevin Smith" />
-          <FarmerContent>
-            <FarmerName>Kevin Smith</FarmerName>
-            <FarmerTitle>Farmer</FarmerTitle>
-          </FarmerContent>
-        </FarmerCard>
-        <FarmerCard>
-          <FarmerImage src={farmer2Img} alt="Jessica Brown" />
-          <FarmerContent>
-            <FarmerName>Jessica Brown</FarmerName>
-            <FarmerTitle>Farmer</FarmerTitle>
-          </FarmerContent>
-        </FarmerCard>
-        <FarmerCard>
-          <FarmerImage src={farmer3Img} alt="David Martin" />
-          <FarmerContent>
-            <FarmerName>David Martin</FarmerName>
-            <FarmerTitle>Farmer</FarmerTitle>
-          </FarmerContent>
-        </FarmerCard>
-      </FarmersGrid>
-    </MeetOurFarmersContainer>
-  );
-}
+const teamMembers = [
+  {
+    name: "Dr. Md Shamshul Arefin",
+    role: "Lead Agronomist",
+    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+  },
+  {
+    name: "Mily",
+    role: "Field Manager",
+    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+  },
+  {
+    name: "Mahin",
+    role: "Irrigation Specialist",
+    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+  },
+  {
+    name: "Mr X",
+    role: "Soil Scientist",
+    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+  },
+  {
+    name: "Mr X",
+    role: "Crop Advisor",
+    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+  },
+];
 
-export default MeetOurFarmersSection;
+const OurTeamSection = () => {
+  return (
+    <TeamSection>
+      <TeamSubtitle>Team Members</TeamSubtitle>
+      <TeamTitle>Meet Our Team</TeamTitle>
+      <TeamGrid>
+        {teamMembers.map((member, index) => (
+          <TeamCard key={index}>
+            <TeamImage src={member.image} alt={member.name} />
+            <TeamContent>
+              <TeamName>{member.name}</TeamName>
+              <TeamRole>{member.role}</TeamRole>
+            </TeamContent>
+          </TeamCard>
+        ))}
+      </TeamGrid>
+    </TeamSection>
+  );
+};
+
+export default OurTeamSection;
