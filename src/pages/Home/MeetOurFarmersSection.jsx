@@ -4,6 +4,8 @@ import arfinsirImg from '../../assets/images/arfinsir.jpg';
 import milyImg from '../../assets/images/mily.png';
 import tarikulImg from '../../assets/images/tarikul.jpg';
 import rehanImg from '../../assets/images/rehan.jpg';
+import saniImg from '../../assets/images/sani.jpg';
+import mahinImg from '../../assets/images/mahin.png';
 const TeamSection = styled.section`
   padding: 60px 20px;
   text-align: center;
@@ -78,27 +80,27 @@ const TeamRole = styled.p`
 const teamMembers = [
   {
     name: 'Dr. Md Shamsul Arefin',
-    role: 'Lead Agronomist',
+    role: 'Project Lead',
     image: arfinsirImg, // Replace with actual image path
   },
   {
     name: 'Md Ibrahim Shikder Mahin',
-    role: 'Field Manager',
-    image: 'https://via.placeholder.com/400x300', // Replace with actual image path
+    role: 'Data Scientist',
+    image: mahinImg, // Replace with actual image path
   },
   {
     name: 'Farzana Akter Mily',
-    role: 'Irrigation Specialist',
+    role: 'Ux & UX Designer',
     image: milyImg, // Replace with actual image path
   },
   {
     name: 'Sahadat Hossain Sani',
-    role: 'Soil Scientist',
-    image: 'https://via.placeholder.com/400x300', // Replace with actual image path
+    role: 'Web Developer (Frontend Focused)',
+    image: saniImg, // Replace with actual image path
   },
   {
     name: 'Takiul Islam Sumon',
-    role: 'Crop Advisor',
+    role: 'Web Developer (Backend Focused)',
     image: tarikulImg, // Replace with actual image path
   },
   {

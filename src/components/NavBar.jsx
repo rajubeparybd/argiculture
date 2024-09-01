@@ -92,7 +92,7 @@ function NavBar() {
   return (
     <NavBarContainer isTransparent={isTransparent} isVisible={isVisible}>
       <TopBar>
-        <LogoText>AgriHelper</LogoText>
+        <LogoText>AgroAI</LogoText>
         <NavLinks>
           <RouterLink to="/#home">
             <NavLink isTransparent={isTransparent}>Home</NavLink>
