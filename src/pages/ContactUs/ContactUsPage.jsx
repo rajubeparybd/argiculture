@@ -127,16 +127,16 @@ function ContactUsPage() {
         <InfoCard bgColor="#f1c40f">
           <InfoCardTitle>Contact Info</InfoCardTitle>
           <InfoCardText>
-            +1 (234) 555-0123 <br />
-            email@example.com <br />
-            Mon-Fri: 9:00 am - 6:00 pm
+            +8801518377354 <br />
+            mahinshiker01@gmail.com <br />
+            Sun-Tue: 9:00 am - 6:00 pm
           </InfoCardText>
         </InfoCard>
         <InfoCard bgColor="#e67e22">
           <InfoCardTitle>Address</InfoCardTitle>
           <InfoCardText>
-            456 Central Road, Golden Street, New York <br />
-            United States of America
+            456 Central Road, Golden Street, Dhaka <br />
+            Bangladesh
           </InfoCardText>
         </InfoCard>
       </InfoCardsContainer>

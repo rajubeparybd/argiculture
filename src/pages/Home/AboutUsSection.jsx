@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import aboutImg from '../../assets/images/about-img.jpeg';  // Replace with the actual image path
+import aboutImg from '../../assets/images/about-img.jpg';  // Replace with the actual image path
 
 const AboutUsSectionContainer = styled.section`
   padding: 80px 50px;

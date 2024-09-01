@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import heroBg from '../../assets/images/hero-bg.jpeg';  // Replace with the actual background image path
-import service1Img from '../../assets/images/farmer1.jpg';  // Replace with the actual image path
-import service2Img from '../../assets/images/farmer2.jpg';  // Replace with the actual image path
-import service3Img from '../../assets/images/farmer3.jpg';  // Replace with the actual image path
-import detailImg from '../../assets/images/about-detail-img.jpeg';  // Replace with the actual image path
+import React from "react";
+import styled from "styled-components";
+import heroBg from "../../assets/images/hero-bg.jpeg"; // Replace with the actual background image path
+import service1Img from "../../assets/images/farmer1.jpg"; // Replace with the actual image path
+import service2Img from "../../assets/images/farmer2.jpg"; // Replace with the actual image path
+import service3Img from "../../assets/images/farmer3.jpg"; // Replace with the actual image path
+import detailImg from "../../assets/images/about-detail-img.jpeg"; // Replace with the actual image path
 
 const HeroSection = styled.section`
   background-image: url(${heroBg});
@@ -109,7 +109,7 @@ const DetailContentWrapper = styled.div`
 `;
 
 const SmallTitle = styled.h3`
-  color: #ffc107;  /* Gold color for the small title */
+  color: #ffc107; /* Gold color for the small title */
   font-size: 18px;
   margin-bottom: 10px;
 `;
@@ -155,7 +155,6 @@ function AboutUsDetail() {
     <>
       <HeroSection>
         <HeroTitle>Agriculture Matters to the Future of Development</HeroTitle>
-        <HeroSubtitle>Watch our video</HeroSubtitle>
         <VideoButton>
           <i className="fas fa-play-circle"></i> {/* Font Awesome play icon */}
         </VideoButton>
@@ -182,23 +181,34 @@ function AboutUsDetail() {
         </DetailImageWrapper>
         <DetailContentWrapper>
           <SmallTitle>What We Do</SmallTitle>
-          <Title>Healthy Food for Good Growth</Title>
+          <Title>Empowering Farmers for Sustainable Farming Future</Title>
           <Description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Nulla pellentesque, venenatis sem non, luctus lacus auctor.
+            Our goal is to transform agriculture by offering farmers innovative
+            instruments and solutions. Our all-inclusive service package is
+            intended to boost output, boost effectiveness, and guarantee
+            environmentally friendly farming methods.
           </Description>
           <IconSection>
             <IconCard>
-              <Icon><i className="fas fa-tractor"></i></Icon> {/* Font Awesome icon */}
-              <IconTitle>Harvesting</IconTitle>
+              <Icon>
+                <i className="fas fa-tractor"></i>
+              </Icon>{" "}
+              {/* Font Awesome icon */}
+              <IconTitle>Suitable Crops</IconTitle>
             </IconCard>
             <IconCard>
-              <Icon><i className="fas fa-tools"></i></Icon> {/* Font Awesome icon */}
-              <IconTitle>Maintenance</IconTitle>
+              <Icon>
+                <i className="fas fa-tools"></i>
+              </Icon>{" "}
+              {/* Font Awesome icon */}
+              <IconTitle>Accurate Diagnosis</IconTitle>
             </IconCard>
             <IconCard>
-              <Icon><i className="fas fa-warehouse"></i></Icon> {/* Font Awesome icon */}
-              <IconTitle>Fencing</IconTitle>
+              <Icon>
+                <i className="fas fa-warehouse"></i>
+              </Icon>{" "}
+              {/* Font Awesome icon */}
+              <IconTitle>Real-time Monitoring</IconTitle>
             </IconCard>
           </IconSection>
         </DetailContentWrapper>

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa'; // Importing a cross icon from react-icons
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import cropImage1 from '../../assets/images/farmer1.jpg';
-import cropImage2 from '../../assets/images/farmer2.jpg';
-import cropImage3 from '../../assets/images/farmer3.jpg';
+import cropImage1 from '../../assets/images/farmer11.jpg';
+import cropImage2 from '../../assets/images/farmer22.jpg';
+import cropImage3 from '../../assets/images/farmer33.jpg';
 import leftSectionImg from '../../assets/images/crop-suggestion-inside.jpg'
 const HeroSection = styled.section`
   display: flex;
@@ -213,9 +213,9 @@ function CropSuggestion() {
 
   const handleGetSuggestions = () => {
     setSuggestions([
-      { name: 'Crop 1', image: cropImage1 },
-      { name: 'Crop 2', image: cropImage2 },
-      { name: 'Crop 3', image: cropImage3 },
+      { name: 'Potato', image: cropImage1 },
+      { name: 'Onion', image: cropImage2 },
+      { name: 'Garlic', image: cropImage3 },
     ]);
     if (suggestionsRef.current) {
       suggestionsRef.current.scrollIntoView({ behavior: 'smooth' });
