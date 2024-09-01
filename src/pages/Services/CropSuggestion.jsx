@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import cropImage1 from '../../assets/images/farmer1.jpg';
 import cropImage2 from '../../assets/images/farmer2.jpg';
 import cropImage3 from '../../assets/images/farmer3.jpg';
-
+import leftSectionImg from '../../assets/images/crop-suggestion-inside.jpg'
 const HeroSection = styled.section`
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@ const HeroCard = styled.div`
 
 const LeftSection = styled.div`
   flex: 1;
-  background-image: url('src//assets//images//crop-suggestion-inside.jpg');
+  background-image:  url(${leftSectionImg});
   background-size: cover;
   background-position: center;
   position: relative;

@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { FaSpinner } from 'react-icons/fa';
-
+import LeftSectionImg from "../../assets/images/disease-classification-inside.jpg"
+import cropdis from '../../assets/images/crop-dis.jpg'
 const HeroSection = styled.section`
   display: flex;
   justify-content: center;
@@ -22,7 +23,7 @@ const HeroCard = styled.div`
 
 const LeftSection = styled.div`
   flex: 1;
-  background-image: url('src/assets/images/disease-classification-inside.jpg');
+  background-image: url(${LeftSectionImg});
   background-size: cover;
   background-position: center;
   position: relative;
@@ -216,7 +217,7 @@ function DiseaseClassification() {
       setIsProcessing(false);
 
       // Example of using a predefined path for the result image.
-      const uploadedImagePath = 'src/assets/images/crop-dis.jpg'; // Replace with the actual image path
+      const uploadedImagePath = cropdis; // Replace with the actual image path
       
       setResult({
         image: uploadedImagePath, // Use the actual path here
