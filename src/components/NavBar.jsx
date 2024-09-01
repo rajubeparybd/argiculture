@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link as ScrollLink } from 'react-scroll'; // Import Link from react-scroll
-import { HashLink as RouterLink } from 'react-router-hash-link'; // Import HashLink from react-router-hash-link
+import { HashLink as RouterLink } from 'react-router-hash-link';
 
 const NavBarContainer = styled.div`
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: ${({ isTransparent }) => (isTransparent ? 'rgba(255, 255, 255, 0)' : '#ffffff')};
+  box-shadow: ${({ isTransparent }) => (isTransparent ? 'none' : '0 2px 10px rgba(0, 0, 0, 0.1)')};
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
   transform: ${({ isVisible }) => (isVisible ? 'translateY(0)' : 'translateY(-100%)')};
 `;
 
@@ -22,7 +21,7 @@ const TopBar = styled.div`
 `;
 
 const LogoText = styled.div`
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #27ae60;
 `;
@@ -33,15 +32,16 @@ const NavLinks = styled.div`
 `;
 
 const NavLink = styled.a`
-  color: #333;
-  font-size: 16px;
+  color: ${({ isTransparent }) => (isTransparent ? '#ffffff' : '#333')};
+  font-size: 18px;
   text-decoration: none;
   font-weight: 500;
   position: relative;
   cursor: pointer;
+  transition: color 0.3s ease;
 
   &:hover {
-    color: #27ae60;
+    color: ${({ isTransparent }) => (isTransparent ? '#27ae60' : '#27ae60')};
   }
 
   &:hover::after {
@@ -49,7 +49,7 @@ const NavLink = styled.a`
     display: block;
     width: 100%;
     height: 2px;
-    background-color: #27ae60;
+    background-color: ${({ isTransparent }) => (isTransparent ? '#27ae60' : '#27ae60')};
     position: absolute;
     bottom: -5px;
     left: 0;
@@ -57,15 +57,26 @@ const NavLink = styled.a`
 `;
 
 function NavBar() {
+  const [isTransparent, setIsTransparent] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      // User is scrolling down
+    const heroSection = document.getElementById('home');
+    if (heroSection) {
+      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+      if (window.scrollY > heroBottom - 100) {
+        setIsTransparent(false);
+      } else {
+        setIsTransparent(true);
+      }
+    }
+
+    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+      // User is scrolling down and has scrolled more than 100px
       setIsVisible(false);
     } else {
-      // User is scrolling up
+      // User is scrolling up or is near the top of the page
       setIsVisible(true);
     }
     setLastScrollY(window.scrollY);
@@ -79,21 +90,21 @@ function NavBar() {
   }, [lastScrollY]);
 
   return (
-    <NavBarContainer isVisible={isVisible}>
+    <NavBarContainer isTransparent={isTransparent} isVisible={isVisible}>
       <TopBar>
         <LogoText>AgriHelper</LogoText>
         <NavLinks>
           <RouterLink to="/#home">
-            <NavLink>Home</NavLink>
+            <NavLink isTransparent={isTransparent}>Home</NavLink>
           </RouterLink>
           <RouterLink to="/#services">
-            <NavLink>Services</NavLink>
+            <NavLink isTransparent={isTransparent}>Services</NavLink>
           </RouterLink>
           <RouterLink to="/#about">
-            <NavLink>About</NavLink>
+            <NavLink isTransparent={isTransparent}>About</NavLink>
           </RouterLink>
           <RouterLink to="/#contact">
-            <NavLink>Contact</NavLink>
+            <NavLink isTransparent={isTransparent}>Contact</NavLink>
           </RouterLink>
         </NavLinks>
       </TopBar>
