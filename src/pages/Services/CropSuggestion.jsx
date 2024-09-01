@@ -27,7 +27,7 @@ const HeroCard = styled.div`
 
 const LeftSection = styled.div`
   flex: 1;
-  background-image: url('https://via.placeholder.com/600');
+  background-image: url('src//assets//images//crop-suggestion-inside.jpg');
   background-size: cover;
   background-position: center;
   position: relative;

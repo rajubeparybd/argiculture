@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import cropSuggestionImg from '../../assets/images/crop-suggestion.jpg';  // Replace with the actual image paths
-import diseaseClassificationImg from '../../assets/images/disease-classification.jpg';  // Replace with the actual image paths
-import waterResourceImg from '../../assets/images/water-resource.jpg';  // Replace with the actual image paths
-import chatBotImg from '../../assets/images/chatbot.jpg';  // Replace with the actual image paths
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import cropSuggestionImg from "../../assets/images/cropPredhome.png"; // Replace with the actual image paths
+import diseaseClassificationImg from "../../assets/images/disease-classification.jpg"; // Replace with the actual image paths
+import waterResourceImg from "../../assets/images/water-resource.jpg"; // Replace with the actual image paths
+import chatBotImg from "../../assets/images/chatbot.jpg"; // Replace with the actual image paths
 
 const ServicesSectionContainer = styled.section`
   padding: 80px 50px;
@@ -38,13 +38,14 @@ const ServicesGrid = styled.div`
   }
 `;
 
-const ServiceCard = styled(Link)`  // Updated to use Link component
+const ServiceCard = styled(Link)`
+  // Updated to use Link component
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
-  text-decoration: none;  // Ensure the link has no underline or color change
+  text-decoration: none; // Ensure the link has no underline or color change
 
   &:hover {
     transform: translateY(-5px);
@@ -84,44 +85,71 @@ function ServicesSection() {
       <SectionSubtitle>Our Services</SectionSubtitle>
       <SectionTitle>What We Offer</SectionTitle>
       <ServicesGrid>
-        <ServiceCard to="/services/crop-suggestion">  {/* Updated Link */}
+        <ServiceCard to="/services/crop-suggestion">
+          {" "}
+          {/* Updated Link */}
           <ServiceImage src={cropSuggestionImg} alt="Crop Suggestion" />
           <ServiceContent>
             <ServiceTitle>Crop Suggestion</ServiceTitle>
             <ServiceDescription>
-              Get personalized crop suggestions based on climate data and other factors.
+              Make informed planting decisions based on identification the most
+              suitable crops for your region and season, helping maximize yields
+              and minimize risks.
             </ServiceDescription>
-            <ServiceIcon><i className="fas fa-seedling"></i></ServiceIcon>
+            <ServiceIcon>
+              <i className="fas fa-seedling"></i>
+            </ServiceIcon>
           </ServiceContent>
         </ServiceCard>
-        <ServiceCard to="/services/disease-classification">  {/* Updated Link */}
-          <ServiceImage src={diseaseClassificationImg} alt="Disease Classification" />
+        <ServiceCard to="/services/disease-classification">
+          {" "}
+          {/* Updated Link */}
+          <ServiceImage
+            src={diseaseClassificationImg}
+            alt="Disease Classification"
+          />
           <ServiceContent>
             <ServiceTitle>Disease Classification</ServiceTitle>
             <ServiceDescription>
-              Identify crop diseases and get suggestions for treatment.
+              Provides real-time updates on potential threats and offers
+              tailored recommendations for disease prevention and treatment,
+              ensuring the health and vitality of your crops.
             </ServiceDescription>
-            <ServiceIcon><i className="fas fa-diagnoses"></i></ServiceIcon>
+            <ServiceIcon>
+              <i className="fas fa-diagnoses"></i>
+            </ServiceIcon>
           </ServiceContent>
         </ServiceCard>
-        <ServiceCard to="/services/water-resource">  {/* Updated Link */}
-          <ServiceImage src={waterResourceImg} alt="Water Resource Management" />
+        <ServiceCard to="/services/water-resource">
+          {" "}
+          {/* Updated Link */}
+          <ServiceImage
+            src={waterResourceImg}
+            alt="Water Resource Management"
+          />
           <ServiceContent>
             <ServiceTitle>Water Resource Management</ServiceTitle>
             <ServiceDescription>
-              Efficiently manage water resources with the latest technology.
+              Stay informed about flood risk in your area with real-time water
+              level monitoring.
             </ServiceDescription>
-            <ServiceIcon><i className="fas fa-water"></i></ServiceIcon>
+            <ServiceIcon>
+              <i className="fas fa-water"></i>
+            </ServiceIcon>
           </ServiceContent>
         </ServiceCard>
-        <ServiceCard to="/services/chatbot">  {/* Updated Link */}
+        <ServiceCard to="/services/chatbot">
+          {" "}
+          {/* Updated Link */}
           <ServiceImage src={chatBotImg} alt="ChatBot Assistance" />
           <ServiceContent>
             <ServiceTitle>ChatBot Assistance</ServiceTitle>
             <ServiceDescription>
               Get real-time support and advice through our AI-powered ChatBot.
             </ServiceDescription>
-            <ServiceIcon><i className="fas fa-robot"></i></ServiceIcon>
+            <ServiceIcon>
+              <i className="fas fa-robot"></i>
+            </ServiceIcon>
           </ServiceContent>
         </ServiceCard>
       </ServicesGrid>

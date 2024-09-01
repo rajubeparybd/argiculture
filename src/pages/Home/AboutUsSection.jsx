@@ -110,14 +110,14 @@ function AboutUsSection() {
         </ImageWrapper>
         <TextWrapper>
           <SmallTitle>Know Us</SmallTitle>
-          <Title>The Best Agriculture Market</Title>
+          <Title>Empowering Farmers with Technology</Title>
           <Description>
-            There are many variations of passages of lorem ipsum available, but the majority have suffered alteration in some form.
+          We provide data-driven solutions to help farmers optimize their agricultural practices and boost productivity.
           </Description>
           <List>
-            <ListItem>Sustainable agriculture practices</ListItem>
-            <ListItem>Efficient and eco-friendly production processes</ListItem>
-            <ListItem>Solutions for improved agricultural management</ListItem>
+            <ListItem>Offering innovative tools to enhance modern farming techniques</ListItem>
+            <ListItem>Solution for a wide range of resources, from crop management tips to soil health</ListItem>
+            <ListItem>Committed to promoting sustainable farming techniques that protect the environment</ListItem>
           </List>
           <Button onClick={handleLearnMoreClick}>Learn More</Button>
         </TextWrapper>

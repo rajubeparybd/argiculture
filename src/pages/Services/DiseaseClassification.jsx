@@ -6,7 +6,7 @@ const HeroSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full screen height */
+  height: 100vh;
   background-color: #f5f5f5;
 `;
 
@@ -22,7 +22,7 @@ const HeroCard = styled.div`
 
 const LeftSection = styled.div`
   flex: 1;
-  background-image: url('https://via.placeholder.com/600');
+  background-image: url('src/assets/images/disease-classification-inside.jpg');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -111,7 +111,7 @@ const PreviewImage = styled.img`
 
 const SubmitButton = styled.button`
   padding: 10px 20px;
-  background-color: #27ae60; /* Green color */
+  background-color: #27ae60;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -135,7 +135,7 @@ const SubmitButton = styled.button`
 const ResultCardWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 50px 0; /* Padding from top and bottom, including from the footer */
+  padding: 50px 0;
 `;
 
 const ResultCard = styled.div`
@@ -210,15 +210,22 @@ function DiseaseClassification() {
 
   const handleSubmit = () => {
     setIsProcessing(true);
+
+    // Simulate an API call or processing step
     setTimeout(() => {
       setIsProcessing(false);
+
+      // Example of using a predefined path for the result image.
+      const uploadedImagePath = 'src/assets/images/crop-dis.jpg'; // Replace with the actual image path
+      
       setResult({
-        image: URL.createObjectURL(selectedImages[0]),
-        disease: 'Sample Disease',
+        image: uploadedImagePath, // Use the actual path here
+        disease: 'Early Blight Disease',
         cure: [
-          'Apply fungicide every two weeks.',
-          'Remove infected leaves immediately.',
-          'Ensure proper spacing between plants.',
+          'Remove Infected Leaves: Remove and destroy infected leaves as soon as you notice them to reduce the spread of the disease.',
+          'Use Resistant Varieties: Plant resistant varieties of tomato if available.',
+          'Proper Spacing: Ensure plants are adequately spaced to improve air circulation.',
+          'Fungicide Application: Apply a fungicide labeled for use against early blight, such as chlorothalonil or copper-based products. Follow the manufacturers instructions carefully.',
         ],
       });
 

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const TeamSection = styled.section`
   padding: 60px 20px;
@@ -21,10 +21,7 @@ const TeamSubtitle = styled.p`
 
 const TeamGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(220px, 1fr)
-  ); /* Adjust grid to fit 5 members nicely */
+  grid-template-columns: repeat(3, 1fr); /* 3 columns for a 3x2 grid */
   gap: 20px;
 
   @media (max-width: 768px) {
@@ -44,10 +41,20 @@ const TeamCard = styled.div`
   }
 `;
 
+const TeamImageWrapper = styled.div`
+  width: 120px;
+  height: 160px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+`;
+
 const TeamImage = styled.img`
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 `;
 
 const TeamContent = styled.div`
@@ -67,29 +74,34 @@ const TeamRole = styled.p`
 
 const teamMembers = [
   {
-    name: "Dr. Md Shamshul Arefin",
-    role: "Lead Agronomist",
-    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+    name: 'Dr. Md Shamsul Arefin',
+    role: 'Lead Agronomist',
+    image: 'src/assets/images/arfinsir.jpg', // Replace with actual image path
   },
   {
-    name: "Mily",
-    role: "Field Manager",
-    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+    name: 'Md Ibrahim Shikder Mahin',
+    role: 'Field Manager',
+    image: 'https://via.placeholder.com/400x300', // Replace with actual image path
   },
   {
-    name: "Mahin",
-    role: "Irrigation Specialist",
-    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+    name: 'Farzana Akter Mily',
+    role: 'Irrigation Specialist',
+    image: 'src/assets/images/mily.png', // Replace with actual image path
   },
   {
-    name: "Mr X",
-    role: "Soil Scientist",
-    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+    name: 'Sahadat Hossain Sani',
+    role: 'Soil Scientist',
+    image: 'https://via.placeholder.com/400x300', // Replace with actual image path
   },
   {
-    name: "Mr X",
-    role: "Crop Advisor",
-    image: "https://via.placeholder.com/400x300", // Replace with actual image path
+    name: 'Takiul Islam Sumon',
+    role: 'Crop Advisor',
+    image: 'src/assets/images/tarikul.jpg', // Replace with actual image path
+  },
+  {
+    name: 'Moinul Islam Rehan',
+    role: 'Research Analyst',
+    image: 'src/assets/images/rehan.jpg', // Replace with actual image path
   },
 ];
 
@@ -101,7 +113,9 @@ const OurTeamSection = () => {
       <TeamGrid>
         {teamMembers.map((member, index) => (
           <TeamCard key={index}>
-            <TeamImage src={member.image} alt={member.name} />
+            <TeamImageWrapper>
+              <TeamImage src={member.image} alt={member.name} />
+            </TeamImageWrapper>
             <TeamContent>
               <TeamName>{member.name}</TeamName>
               <TeamRole>{member.role}</TeamRole>
