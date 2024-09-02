@@ -108,9 +108,9 @@ function ChatBotPage() {
     }
   };
 
-  const simulateBotResponse = (userMessage) => {
+  const simulateBotResponse = () => {
     setTimeout(() => {
-      const botResponse = { text: `You said: ${userMessage}`, isUser: false };
+      const botResponse = { text: `Hi! Welcome to the Agro AI. I am here to help you to boost your farming.`, isUser: false };
       setMessages((prevMessages) => [...prevMessages, botResponse]);
     }, 1000);
   };

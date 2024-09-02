@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../assets/images/logo.jpg'; // Replace with the actual logo path
+import logo from '../assets/images/logo.png'; // Replace with the actual logo path
 
 const FooterContainer = styled.footer`
   background-color: #232323;
@@ -139,9 +139,9 @@ function Footer() {
     <FooterContainer>
       <FooterContent>
         <LogoSection>
-          <Logo src={logo} alt="Agrios Logo" />
+          <Logo src={logo} alt="Agro AI Logo" />
           <Description>
-            There are many variations of passages of lorem ipsum available, but the majority suffered.
+          Your Smile, Our Success
           </Description>
           <SocialIcons>
             <SocialIcon href="#"><i className="fab fa-twitter"></i></SocialIcon>

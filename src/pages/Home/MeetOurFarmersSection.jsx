@@ -90,7 +90,7 @@ const teamMembers = [
   },
   {
     name: 'Farzana Akter Mily',
-    role: 'UI & UX Designer',
+    role: 'Research Analyst',
     image: milyImg, // Replace with actual image path
   },
   {
@@ -105,7 +105,7 @@ const teamMembers = [
   },
   {
     name: 'Moinul Islam Rehan',
-    role: 'Research Analyst',
+    role: 'UI & UX Designer',
     image: rehanImg, // Replace with actual image path
   },
 ];
