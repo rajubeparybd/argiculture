@@ -1,24 +1,32 @@
-import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
-import { FaSpinner } from 'react-icons/fa';
-import LeftSectionImg from "../../assets/images/disease-classification-inside.jpg"
-import cropdis from '../../assets/images/crop-dis.jpg'
+import React, { useState, useRef } from "react";
+import styled from "styled-components";
+import { FaSpinner, FaCamera, FaTimes } from "react-icons/fa";
+import Webcam from "react-webcam";
+import LeftSectionImg from "../../assets/images/disease-classification-inside.jpg";
+import cropdis from "../../assets/images/crop-dis.jpg";
+
 const HeroSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; /* Changed from height to min-height */
   background-color: #f5f5f5;
+  padding: 20px; /* Added padding for mobile responsiveness */
 `;
 
 const HeroCard = styled.div`
   display: flex;
-  width: 90%;
-  height: 80vh;
+  flex-direction: row; /* Added for mobile responsiveness */
+  width: 100%;
+  max-width: 1200px; /* Added max-width */
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack sections on mobile */
+  }
 `;
 
 const LeftSection = styled.div`
@@ -34,7 +42,7 @@ const LeftSection = styled.div`
   color: #fff;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -42,6 +50,11 @@ const LeftSection = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    height: 300px; /* Adjusted height for mobile */
   }
 `;
 
@@ -53,10 +66,18 @@ const LeftContent = styled.div`
 const Title = styled.h1`
   font-size: 36px;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
 `;
 
 const Description = styled.p`
   font-size: 18px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const RightSection = styled.div`
@@ -66,12 +87,20 @@ const RightSection = styled.div`
   justify-content: center;
   padding: 40px;
   background-color: #f9f9f9;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const ImageUploadTitle = styled.h3`
   font-size: 20px;
   margin-bottom: 15px;
   color: ${({ theme }) => theme.colors.primary};
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const ImageUploadWrapper = styled.label`
@@ -89,6 +118,10 @@ const ImageUploadWrapper = styled.label`
     border-color: ${({ theme }) => theme.colors.darkPrimary};
     transform: translateY(-5px);
   }
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `;
 
 const ImageUpload = styled.input`
@@ -100,6 +133,7 @@ const ImagePreview = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
+  justify-content: center;
 `;
 
 const PreviewImage = styled.img`
@@ -111,8 +145,9 @@ const PreviewImage = styled.img`
 `;
 
 const SubmitButton = styled.button`
-  padding: 10px 20px;
-  background-color: #27ae60;
+  padding: 12px 24px;
+  background-color: ${({ theme }) =>
+    theme.colors.primary}; /* Use theme color */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -122,9 +157,11 @@ const SubmitButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
 
   &:hover {
-    background-color: #1e8449;
+    background-color: ${({ theme }) =>
+      theme.colors.darkPrimary}; /* Use darker shade */
   }
 
   &:disabled {
@@ -136,16 +173,22 @@ const SubmitButton = styled.button`
 const ResultCardWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 50px 0;
+  padding: 50px 20px; /* Added horizontal padding */
+
+  @media (max-width: 768px) {
+    padding: 30px 10px;
+  }
 `;
 
 const ResultCard = styled.div`
-  width: 70%;
+  width: 100%;
+  max-width: 800px;
   padding: 30px;
   background-color: #ffffff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   display: flex;
+  flex-direction: row; /* Added for responsiveness */
   justify-content: space-between;
   align-items: center;
   transition: transform 0.3s ease;
@@ -154,11 +197,20 @@ const ResultCard = styled.div`
     transform: translateY(-10px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const ResultLeftSection = styled.div`
   flex: 1;
   text-align: center;
+  margin-bottom: 20px; /* Added margin for mobile */
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const ResultImage = styled.img`
@@ -179,12 +231,16 @@ const DiseaseName = styled.h2`
 const ResultRightSection = styled.div`
   flex: 2;
   padding-left: 30px;
+
+  @media (max-width: 768px) {
+    padding-left: 0;
+  }
 `;
 
 const CureTitle = styled.h3`
   font-size: 24px;
   margin-bottom: 15px;
-  color: #27ae60;
+  color: ${({ theme }) => theme.colors.primary}; /* Use theme color */
 `;
 
 const CureList = styled.ul`
@@ -197,42 +253,163 @@ const CureItem = styled.li`
   margin-bottom: 10px;
 `;
 
+/* Updated Styled Components for Camera Button and Modal */
+const CaptureButton = styled.button`
+  padding: 12px 24px;
+  background-color: ${({ theme }) =>
+    theme.colors.secondary}; /* Use theme secondary color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: ${({ theme }) =>
+      theme.colors.darkSecondary}; /* Use darker shade */
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+
+  svg {
+    margin-right: 8px;
+  }
+`;
+
+const ModalBackground = styled.div`
+  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContent = styled.div`
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Added to prevent overflow issues */
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
+`;
+
+/* Updated CloseButton with higher z-index */
+const CloseButton = styled.button`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 2; /* Ensures the button is above other elements */
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.primary};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.darkPrimary};
+  }
+`;
 function DiseaseClassification() {
   const [selectedImages, setSelectedImages] = useState([]);
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState(null);
 
   const resultRef = useRef(null);
+  const webcamRef = useRef(null);
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     setSelectedImages(files);
+    setCapturedImage(null); // Clear captured image if new images are uploaded
   };
 
-  const handleSubmit = () => {
+  const openCamera = () => {
+    setIsCameraOpen(true);
+    setSelectedImages([]); // Clear selected images if camera is opened
+  };
+
+  const closeCamera = () => {
+    setIsCameraOpen(false);
+  };
+
+  const captureImage = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setCapturedImage(imageSrc);
+    setIsCameraOpen(false);
+  };
+
+  const handleSubmit = async () => {
+    if (!capturedImage && selectedImages.length === 0) {
+      // No image selected or captured
+      return;
+    }
+
     setIsProcessing(true);
 
-    // Simulate an API call or processing step
-    setTimeout(() => {
-      setIsProcessing(false);
+    try {
+      let formData = new FormData();
 
-      // Example of using a predefined path for the result image.
-      const uploadedImagePath = cropdis; // Replace with the actual image path
-      
-      setResult({
-        image: uploadedImagePath, // Use the actual path here
-        disease: 'Early Blight Disease',
-        cure: [
-          'Remove Infected Leaves: Remove and destroy infected leaves as soon as you notice them to reduce the spread of the disease.',
-          'Use Resistant Varieties: Plant resistant varieties of tomato if available.',
-          'Proper Spacing: Ensure plants are adequately spaced to improve air circulation.',
-          'Fungicide Application: Apply a fungicide labeled for use against early blight, such as chlorothalonil or copper-based products. Follow the manufacturers instructions carefully.',
-        ],
+      if (capturedImage) {
+        // Convert data URL to Blob
+        const res = await fetch(capturedImage);
+        const blob = await res.blob();
+        formData.append("image", blob, "capturedImage.jpg");
+      } else if (selectedImages.length > 0) {
+        formData.append("image", selectedImages[0]);
+      }
+
+      // Make API call to backend
+      const response = await fetch("http://127.0.0.1:8000/api/analyze", {
+        method: "POST",
+        body: formData,
       });
 
-      // Scroll to the result card after processing
-      resultRef.current.scrollIntoView({ behavior: 'smooth' });
-    }, 3000);
+      const resultData = await response.json();
+
+      if (response.ok) {
+        setResult({
+          image: resultData.processedImage,
+          disease: resultData.diseaseName,
+          cure: resultData.cure,
+        });
+
+        // Scroll to the result card after processing
+        if (resultRef.current) {
+          resultRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        console.error("Error from backend:", resultData.error);
+        alert("Error: " + resultData.error);
+      }
+    } catch (error) {
+      console.error("Error processing image:", error);
+      alert("Error processing image. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -243,20 +420,23 @@ function DiseaseClassification() {
             <LeftContent>
               <Title>Disease Classification Service</Title>
               <Description>
-                Upload an image of your crop, and we'll identify the disease and suggest a cure.
+                Upload an image of your crop, or use your camera to capture one.
+                We'll identify the disease and suggest a cure.
               </Description>
             </LeftContent>
           </LeftSection>
           <RightSection>
+            <CaptureButton onClick={openCamera}>
+              <FaCamera /> Open Camera
+            </CaptureButton>
             <ImageUploadTitle>Upload Crop Image</ImageUploadTitle>
             <ImageUploadWrapper>
               <ImageUpload
                 type="file"
                 accept="image/*"
-                multiple
                 onChange={handleImageUpload}
               />
-              <p>Click here to upload images</p>
+              <p>Click here to upload an image</p>
               <ImagePreview>
                 {selectedImages.map((image, index) => (
                   <PreviewImage
@@ -265,18 +445,23 @@ function DiseaseClassification() {
                     alt={`Selected ${index + 1}`}
                   />
                 ))}
+                {capturedImage && (
+                  <PreviewImage src={capturedImage} alt="Captured" />
+                )}
               </ImagePreview>
             </ImageUploadWrapper>
             <SubmitButton
               onClick={handleSubmit}
-              disabled={isProcessing || selectedImages.length === 0}
+              disabled={
+                isProcessing || (selectedImages.length === 0 && !capturedImage)
+              }
             >
               {isProcessing ? (
                 <>
                   <FaSpinner className="spinner" /> Processing...
                 </>
               ) : (
-                'Submit'
+                "Submit"
               )}
             </SubmitButton>
           </RightSection>
@@ -301,6 +486,28 @@ function DiseaseClassification() {
           </ResultCard>
         </ResultCardWrapper>
       )}
+
+      {/* Camera Modal */}
+      <ModalBackground isOpen={isCameraOpen}>
+        <ModalContent>
+          <CloseButton onClick={closeCamera}>
+            <FaTimes />
+          </CloseButton>
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            width="100%"
+            videoConstraints={{
+              facingMode: "environment", // Use rear camera if available
+            }}
+            style={{ borderRadius: "10px" }}
+          />
+          <CaptureButton onClick={captureImage}>
+            <FaCamera /> Capture Photo
+          </CaptureButton>
+        </ModalContent>
+      </ModalBackground>
     </div>
   );
 }
