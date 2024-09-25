@@ -1,11 +1,20 @@
-// src/data/dummyPosts.js
 import { v4 as uuidv4 } from 'uuid';
+// Import images from the folder
+import wheatImg from '../assets/images/wheat.jpg';
+import cornImg from '../assets/images/corn.jpg';
+import riceImg from '../assets/images/rice.jpg';
+import barleyImg from '../assets/images/barley.jpg';
+import soybeanImg from '../assets/images/soybean.jpg';
+// Add more images as needed
 
+// Use the imported images in the array
 const cropImages = [
-  'https://source.unsplash.com/featured/?wheat',
-  'https://source.unsplash.com/featured/?corn',
-  'https://source.unsplash.com/featured/?rice',
-  // Add more image URLs or use placeholder images
+  wheatImg,
+  cornImg,
+  riceImg,
+  barleyImg,
+  soybeanImg,
+  // Add more imported images here
 ];
 
 const cropNames = ['Wheat', 'Corn', 'Rice', 'Barley', 'Soybean'];
