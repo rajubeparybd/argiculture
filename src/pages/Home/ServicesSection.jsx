@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import cropSuggestionImg from "../../assets/images/cropPredhome.png"; // Replace with the actual image paths
-import diseaseClassificationImg from "../../assets/images/disease-classification.jpg"; // Replace with the actual image paths
-import waterResourceImg from "../../assets/images/water-resource.jpg"; // Replace with the actual image paths
-import chatBotImg from "../../assets/images/chatbot.jpg"; // Replace with the actual image paths
-
+import cropSuggestionImg from "../../assets/images/cropPredhome.png";
+import diseaseClassificationImg from "../../assets/images/disease-classification.jpg";
+import waterResourceImg from "../../assets/images/water-resource.jpg";
+import chatBotImg from "../../assets/images/chatbot.jpg";
+import soilQualityTestingImg from "../../assets/images/water-resource.jpg"; // Add the correct image path
+import marketplaceImg from "../../assets/images/disease-classification.jpg";
 const ServicesSectionContainer = styled.section`
   padding: 80px 50px;
   background-color: #f5f5f5;
@@ -26,7 +27,7 @@ const SectionSubtitle = styled.h3`
 
 const ServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 
   @media (max-width: 1024px) {
@@ -39,13 +40,12 @@ const ServicesGrid = styled.div`
 `;
 
 const ServiceCard = styled(Link)`
-  // Updated to use Link component
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
-  text-decoration: none; // Ensure the link has no underline or color change
+  text-decoration: none;
 
   &:hover {
     transform: translateY(-5px);
@@ -86,24 +86,21 @@ function ServicesSection() {
       <SectionTitle>What We Offer</SectionTitle>
       <ServicesGrid>
         <ServiceCard to="/services/crop-suggestion">
-          {" "}
-          {/* Updated Link */}
           <ServiceImage src={cropSuggestionImg} alt="Crop Suggestion" />
           <ServiceContent>
             <ServiceTitle>Crop Suggestion</ServiceTitle>
             <ServiceDescription>
-              Make informed planting decisions based on identification the most
-              suitable crops for your region and season, helping maximize yields
-              and minimize risks.
+              Make informed planting decisions by identifying the most suitable
+              crops for your region and season, helping maximize yields and
+              minimize risks.
             </ServiceDescription>
             <ServiceIcon>
               <i className="fas fa-seedling"></i>
             </ServiceIcon>
           </ServiceContent>
         </ServiceCard>
+
         <ServiceCard to="/services/disease-classification">
-          {" "}
-          {/* Updated Link */}
           <ServiceImage
             src={diseaseClassificationImg}
             alt="Disease Classification"
@@ -120,9 +117,8 @@ function ServicesSection() {
             </ServiceIcon>
           </ServiceContent>
         </ServiceCard>
+
         <ServiceCard to="/services/water-resource">
-          {" "}
-          {/* Updated Link */}
           <ServiceImage
             src={waterResourceImg}
             alt="Water Resource Management"
@@ -130,7 +126,7 @@ function ServicesSection() {
           <ServiceContent>
             <ServiceTitle>Water Resource Management</ServiceTitle>
             <ServiceDescription>
-              Stay informed about flood risk in your area with real-time water
+              Stay informed about flood risks in your area with real-time water
               level monitoring.
             </ServiceDescription>
             <ServiceIcon>
@@ -138,9 +134,8 @@ function ServicesSection() {
             </ServiceIcon>
           </ServiceContent>
         </ServiceCard>
+
         <ServiceCard to="/services/chatbot">
-          {" "}
-          {/* Updated Link */}
           <ServiceImage src={chatBotImg} alt="ChatBot Assistance" />
           <ServiceContent>
             <ServiceTitle>ChatBot Assistance</ServiceTitle>
@@ -149,6 +144,39 @@ function ServicesSection() {
             </ServiceDescription>
             <ServiceIcon>
               <i className="fas fa-robot"></i>
+            </ServiceIcon>
+          </ServiceContent>
+        </ServiceCard>
+
+        {/* New Soil Quality Testing Service */}
+        <ServiceCard to="/services/soil-quality-testing">
+          <ServiceImage
+            src={soilQualityTestingImg}
+            alt="Soil Quality Testing"
+          />
+          <ServiceContent>
+            <ServiceTitle>Soil Quality Testing</ServiceTitle>
+            <ServiceDescription>
+              Measure and analyze soil conditions with our NPK sensor, providing
+              insights into nitrogen, phosphorus, potassium, pH, temperature,
+              and moisture levels. Get tailored crop suggestions based on your
+              soil data.
+            </ServiceDescription>
+            <ServiceIcon>
+              <i className="fas fa-leaf"></i>
+            </ServiceIcon>
+          </ServiceContent>
+        </ServiceCard>
+        <ServiceCard to="/services/marketplace">
+          <ServiceImage src={marketplaceImg} alt="Marketplace" />
+          <ServiceContent>
+            <ServiceTitle>Marketplace</ServiceTitle>
+            <ServiceDescription>
+              Buy and sell harvested crops directly with other farmers through
+              our marketplace.
+            </ServiceDescription>
+            <ServiceIcon>
+              <i className="fas fa-store"></i>
             </ServiceIcon>
           </ServiceContent>
         </ServiceCard>

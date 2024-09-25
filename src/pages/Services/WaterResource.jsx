@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect }from 'react';
 import { MapContainer, TileLayer, Circle, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import styled from 'styled-components';
@@ -63,6 +63,9 @@ const LegendColor = styled.span`
 `;
 
 const WaterResource = () => {
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <FullScreenMapWrapper>
       <MapContainer

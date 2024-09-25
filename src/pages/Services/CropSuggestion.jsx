@@ -1,18 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-import { FaTimes } from 'react-icons/fa'; // Importing a cross icon from react-icons
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import cropImage1 from '../../assets/images/farmer11.jpg';
-import cropImage2 from '../../assets/images/farmer22.jpg';
-import cropImage3 from '../../assets/images/farmer33.jpg';
-import leftSectionImg from '../../assets/images/crop-suggestion-inside.jpg'
+// src/components/Marketplace/CropSuggestion.jsx
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import { FaTimes } from "react-icons/fa"; // Importing a cross icon from react-icons
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import cropImage1 from "../../assets/images/farmer11.jpg";
+import cropImage2 from "../../assets/images/farmer22.jpg";
+import cropImage3 from "../../assets/images/farmer33.jpg";
+import leftSectionImg from "../../assets/images/crop-suggestion-inside.jpg";
+
+// Styled Components
+
 const HeroSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* Adjusted height to account for navbar */
+  min-height: calc(100vh - 60px); /* 60px is the navbar height for desktop */
+  padding-top: 60px; /* Push content below the navbar */
   background-color: #f5f5f5;
+
+  @media (max-width: 768px) {
+    min-height: calc(80vh); /* 50px is the navbar height for mobile */
+    padding-top: 1px;
+  }
 `;
 
 const HeroCard = styled.div`
@@ -23,11 +34,19 @@ const HeroCard = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
 `;
 
 const LeftSection = styled.div`
   flex: 1;
-  background-image:  url(${leftSectionImg});
+  background-image: url(${leftSectionImg});
   background-size: cover;
   background-position: center;
   position: relative;
@@ -38,7 +57,7 @@ const LeftSection = styled.div`
   color: #fff;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -47,20 +66,39 @@ const LeftSection = styled.div`
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
+
+  @media (max-width: 768px) {
+    height: 200px;
+    padding: 20px;
+  }
 `;
 
 const LeftContent = styled.div`
   position: relative;
   z-index: 2;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    text-align: left;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 36px;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
 `;
 
 const Description = styled.p`
   font-size: 18px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const RightSection = styled.div`
@@ -70,10 +108,31 @@ const RightSection = styled.div`
   justify-content: center;
   padding: 40px;
   background-color: #f9f9f9;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const DatePickerWrapper = styled.div`
   margin-bottom: 20px;
+
+  .date-picker {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+
+    .date-picker {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
 `;
 
 const LocationButton = styled.button`
@@ -90,6 +149,12 @@ const LocationButton = styled.button`
   &:hover {
     background-color: #1e8449;
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 `;
 
 const SuggestButton = styled.button`
@@ -105,10 +170,15 @@ const SuggestButton = styled.button`
   &:hover {
     background-color: #21618c;
   }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 `;
 
 const ModalBackground = styled.div`
-  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
   position: fixed;
   top: 0;
   left: 0;
@@ -118,6 +188,7 @@ const ModalBackground = styled.div`
   z-index: 1000;
   justify-content: center;
   align-items: center;
+  padding: 20px; /* Added padding for smaller screens */
 `;
 
 const ModalContent = styled.div`
@@ -127,6 +198,13 @@ const ModalContent = styled.div`
   width: 80%;
   max-width: 800px;
   position: relative;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: none;
+    border-radius: 5px;
+    padding: 15px;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -141,6 +219,12 @@ const CloseButton = styled.button`
 
   &:hover {
     color: #c0392b;
+  }
+
+  @media (max-width: 768px) {
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
   }
 `;
 
@@ -158,11 +242,22 @@ const PickButton = styled.button`
   &:hover {
     background-color: #1e8449;
   }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 8px 16px;
+    margin-top: 15px;
+  }
 `;
 
 const SuggestionsContainer = styled.div`
   padding: 40px;
   padding-bottom: 80px; /* Padding for footer space */
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    padding-bottom: 60px;
+  }
 `;
 
 const SuggestionsGrid = styled.div`
@@ -170,6 +265,15 @@ const SuggestionsGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-top: 40px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
 `;
 
 const CropCard = styled.div`
@@ -178,19 +282,36 @@ const CropCard = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+    border-radius: 5px;
+  }
 `;
 
 const CropImage = styled.img`
   width: 100%;
   border-radius: 10px;
   margin-bottom: 15px;
+
+  @media (max-width: 768px) {
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
 `;
 
 const CropName = styled.h4`
   font-size: 18px;
   color: #333;
   margin: 10px 0;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin: 8px 0;
+  }
 `;
+
+// CropSuggestion Component
 
 function CropSuggestion() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -209,18 +330,27 @@ function CropSuggestion() {
 
   const handlePickClick = () => {
     setIsModalOpen(false); // Close the modal when "Pick" is clicked
+    // You can add additional logic here to handle the selected location
   };
 
   const handleGetSuggestions = () => {
-    setSuggestions([
-      { name: 'Potato', image: cropImage1 },
-      { name: 'Onion', image: cropImage2 },
-      { name: 'Garlic', image: cropImage3 },
-    ]);
-    if (suggestionsRef.current) {
-      suggestionsRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (startDate && endDate) {
+      setSuggestions([
+        { name: "Potato", image: cropImage1 },
+        { name: "Onion", image: cropImage2 },
+        { name: "Garlic", image: cropImage3 },
+      ]);
+      if (suggestionsRef.current) {
+        suggestionsRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      alert("Please select both start and end dates.");
     }
   };
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <div>
@@ -230,12 +360,15 @@ function CropSuggestion() {
             <LeftContent>
               <Title>Crop Suggestion Service</Title>
               <Description>
-                Get personalized crop suggestions based on your selected location and planting schedule.
+                Get personalized crop suggestions based on your selected
+                location and planting schedule.
               </Description>
             </LeftContent>
           </LeftSection>
           <RightSection>
-            <LocationButton onClick={handleLocationClick}>Select Location</LocationButton>
+            <LocationButton onClick={handleLocationClick}>
+              Select Location
+            </LocationButton>
             <DatePickerWrapper>
               <DatePicker
                 selected={startDate}
@@ -254,7 +387,9 @@ function CropSuggestion() {
                 className="date-picker"
               />
             </DatePickerWrapper>
-            <SuggestButton onClick={handleGetSuggestions}>Get Suggestion</SuggestButton>
+            <SuggestButton onClick={handleGetSuggestions}>
+              Get Suggestion
+            </SuggestButton>
           </RightSection>
         </HeroCard>
       </HeroSection>
@@ -274,7 +409,7 @@ function CropSuggestion() {
 
       <ModalBackground isOpen={isModalOpen}>
         <ModalContent>
-          <CloseButton onClick={handleModalClose}>
+          <CloseButton onClick={handleModalClose} aria-label="Close Modal">
             <FaTimes />
           </CloseButton>
           <h2>Select Location</h2>

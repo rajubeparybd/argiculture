@@ -116,9 +116,8 @@ function ChatBotPage() {
   };
 
   useEffect(() => {
-    chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
-  }, [messages]);
-
+    window.scroll(0, 0);
+  }, []);
   return (
     <ChatContainer>
       <ChatTitle>Chat with Our AI Assistant</ChatTitle>

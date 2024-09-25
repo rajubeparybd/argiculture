@@ -1,10 +1,11 @@
-import React from 'react';
-import HeroSection from './HeroSection';
-import ServicesSection from './ServicesSection';
-import AboutUsSection from './AboutUsSection';
-import ContactUsSection from './ContactUsSection';
-import MeetOurFarmersSection from './MeetOurFarmersSection';
-import MarketLeaderSection from './MarketLeaderSection';
+import React from "react";
+import HeroSection from "./HeroSection";
+import ServicesSection from "./ServicesSection";
+import AboutUsSection from "./AboutUsSection";
+import ContactUsSection from "./ContactUsSection";
+import MeetOurFarmersSection from "./MeetOurFarmersSection";
+import MarketLeaderSection from "./MarketLeaderSection";
+import SustainableInitiatives from "../../components/sdg";
 
 function HomePage() {
   return (
@@ -18,12 +19,16 @@ function HomePage() {
       <section id="about">
         <AboutUsSection />
       </section>
+      <section id="market">
+        <SustainableInitiatives />
+      </section>
       <section id="farmers">
         <MeetOurFarmersSection />
       </section>
       <section id="contact">
         <ContactUsSection />
       </section>
+
       <section id="market">
         <MarketLeaderSection />
       </section>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import styled from "styled-components";
 import { FaSpinner, FaCamera, FaTimes } from "react-icons/fa";
 import Webcam from "react-webcam";
@@ -411,7 +411,9 @@ function DiseaseClassification() {
       setIsProcessing(false);
     }
   };
-
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <div>
       <HeroSection>
