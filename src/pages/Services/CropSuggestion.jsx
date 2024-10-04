@@ -1,15 +1,82 @@
 // src/components/Marketplace/CropSuggestion.jsx
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { FaTimes } from "react-icons/fa"; // Importing a cross icon from react-icons
+import { FaTimes } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import cropImage1 from "../../assets/images/farmer11.jpg";
-import cropImage2 from "../../assets/images/farmer22.jpg";
-import cropImage3 from "../../assets/images/farmer33.jpg";
 import leftSectionImg from "../../assets/images/crop-suggestion-inside.jpg";
+import axios from "axios";
 
-// Styled Components
+// Import images
+import Bell_pepper from "../../assets/images/crops/summer/Bell_pepper.jpg";
+import Carrot from "../../assets/images/crops/summer/Carrot.jpg";
+import Wheat from "../../assets/images/crops/summer/Wheat.jpg";
+import Watermelon from "../../assets/images/crops/summer/Watermelon.jpg";
+import Tomato from "../../assets/images/crops/summer/Tomato.jpg";
+import Potato from "../../assets/images/crops/summer/Potato.jpg";
+import Green_Bean from "../../assets/images/crops/summer/Green_Bean.jpg";
+import Eggplant from "../../assets/images/crops/summer/Eggplant.jpg";
+import Cucumber from "../../assets/images/crops/summer/Cucumber.jpg";
+import Corn from "../../assets/images/crops/summer/Corn.jpg";
+import Black_gram from "../../assets/images/crops/rainy/Black_gram.jpg";
+import Sugarcane from "../../assets/images/crops/rainy/Sugarcane.jpg";
+import Soybeans from "../../assets/images/crops/rainy/Soybeans.jpg";
+import Rice from "../../assets/images/crops/rainy/Rice.jpg";
+import Pumpkins from "../../assets/images/crops/rainy/Pumpkins.jpg";
+import Papaya from "../../assets/images/crops/rainy/papaya.jpg";
+import Mustard from "../../assets/images/crops/rainy/Mustard.jpg";
+import Mung_beans from "../../assets/images/crops/rainy/Mung_beans.jpg";
+import Jute from "../../assets/images/crops/rainy/jute.jpg";
+import chana from "../../assets/images/crops/rainy/chana.jpg";
+import Turnip from "../../assets/images/crops/winter/Turnip.jpg";
+import Radish from "../../assets/images/crops/winter/Radish.jpg";
+import Leek from "../../assets/images/crops/winter/Leek.jpg";
+import Leafy_Lettuce from "../../assets/images/crops/winter/Leafy_Lettuce.jpg";
+import Green_Onion from "../../assets/images/crops/winter/Green_Onion.jpg";
+import Collard from "../../assets/images/crops/winter/Collard.jpg";
+import Cauliflower from "../../assets/images/crops/winter/Cauliflower.jpg";
+import Cabbage from "../../assets/images/crops/winter/Cabbage.jpg";
+import Broccoli from "../../assets/images/crops/winter/Broccoli.jpg";
+import Beet from "../../assets/images/crops/winter/Beet.jpg";
+
+
+// ... import images for all crops
+
+// Create a mapping of crop names to images
+const cropImages = {
+  Bell_Pepper: Bell_pepper,
+  Carrot: Carrot,
+  Wheat: Wheat,
+  Watermelon: Watermelon,
+  Tomato: Tomato,
+  Potato: Potato,
+  Green_Bean: Green_Bean,
+  Eggplant: Eggplant,
+  Cucumber: Cucumber,
+  Corn: Corn,
+
+  Black_gram: Black_gram,
+  Sugarcane: Sugarcane,
+  Soybeans: Soybeans,
+  Rice: Rice,
+  Pumpkin: Pumpkins,
+  Papaya: Papaya,
+  Mustard: Mustard,
+  Mung_beans: Mung_beans,
+  Jute: Jute,
+  Okra: chana,
+
+  Radish: Radish,
+  Turnip: Turnip,
+  Leek: Leek,
+  Green_Onion: Green_Onion,
+  Cauliflower: Cauliflower,
+  Cabbage: Cabbage,
+  Collard: Collard,
+  Broccoli: Broccoli,
+  Beet: Beet,
+  Leafy_Lettuce: Leafy_Lettuce,
+};
 
 const HeroSection = styled.section`
   display: flex;
@@ -21,7 +88,7 @@ const HeroSection = styled.section`
   background-color: #f5f5f5;
 
   @media (max-width: 768px) {
-    min-height: calc(80vh); /* 50px is the navbar height for mobile */
+    min-height: calc(80vh);
     padding-top: 1px;
   }
 `;
@@ -188,7 +255,7 @@ const ModalBackground = styled.div`
   z-index: 1000;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* Added padding for smaller screens */
+  padding: 20px;
 `;
 
 const ModalContent = styled.div`
@@ -252,7 +319,7 @@ const PickButton = styled.button`
 
 const SuggestionsContainer = styled.div`
   padding: 40px;
-  padding-bottom: 80px; /* Padding for footer space */
+  padding-bottom: 80px;
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -318,6 +385,8 @@ function CropSuggestion() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const suggestionsRef = useRef(null);
 
   const handleLocationClick = () => {
@@ -329,19 +398,38 @@ function CropSuggestion() {
   };
 
   const handlePickClick = () => {
-    setIsModalOpen(false); // Close the modal when "Pick" is clicked
+    setIsModalOpen(false);
     // You can add additional logic here to handle the selected location
   };
 
-  const handleGetSuggestions = () => {
+  const handleGetSuggestions = async () => {
     if (startDate && endDate) {
-      setSuggestions([
-        { name: "Potato", image: cropImage1 },
-        { name: "Onion", image: cropImage2 },
-        { name: "Garlic", image: cropImage3 },
-      ]);
-      if (suggestionsRef.current) {
-        suggestionsRef.current.scrollIntoView({ behavior: "smooth" });
+      setIsLoading(true);
+      setError(null);
+
+      // Format dates to 'YYYY-MM-DD' for the API
+      const formattedStartDate = startDate.toISOString().split("T")[0];
+      const formattedEndDate = endDate.toISOString().split("T")[0];
+
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/suggest_crops",
+          {
+            start_date: formattedStartDate,
+            end_date: formattedEndDate,
+          }
+        );
+
+        setSuggestions(response.data);
+        setIsLoading(false);
+
+        if (suggestionsRef.current) {
+          suggestionsRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      } catch (err) {
+        console.error("Error fetching suggestions:", err);
+        setError("Failed to fetch crop suggestions. Please try again.");
+        setIsLoading(false);
       }
     } else {
       alert("Please select both start and end dates.");
@@ -376,6 +464,7 @@ function CropSuggestion() {
                 placeholderText="Select Start Date"
                 dateFormat="MM/dd/yyyy"
                 className="date-picker"
+                maxDate={endDate || null}
               />
             </DatePickerWrapper>
             <DatePickerWrapper>
@@ -385,6 +474,7 @@ function CropSuggestion() {
                 placeholderText="Select End Date"
                 dateFormat="MM/dd/yyyy"
                 className="date-picker"
+                minDate={startDate || null}
               />
             </DatePickerWrapper>
             <SuggestButton onClick={handleGetSuggestions}>
@@ -395,12 +485,17 @@ function CropSuggestion() {
       </HeroSection>
 
       <SuggestionsContainer ref={suggestionsRef}>
+        {isLoading && <p>Loading suggestions...</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
         {suggestions.length > 0 && (
           <SuggestionsGrid>
             {suggestions.map((crop, index) => (
               <CropCard key={index}>
-                <CropImage src={crop.image} alt={crop.name} />
+                {crop.name in cropImages && (
+                  <CropImage src={cropImages[crop.name]} alt={crop.name} />
+                )}
                 <CropName>{crop.name}</CropName>
+                <p>Season: {crop.season}</p>
               </CropCard>
             ))}
           </SuggestionsGrid>
@@ -413,6 +508,7 @@ function CropSuggestion() {
             <FaTimes />
           </CloseButton>
           <h2>Select Location</h2>
+          {/* You can implement location selection here */}
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48351.20274640604!2d-0.13556838164659784!3d51.50767871089981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b3339e45f3d%3A0xd19d91f58c6c1d45!2sLondon%20Eye!5e0!3m2!1sen!2suk!4v1614088778474!5m2!1sen!2suk"
             width="100%"

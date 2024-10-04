@@ -1,119 +1,154 @@
-import React, {useEffect }from 'react';
-import { MapContainer, TileLayer, Circle, Popup } from 'react-leaflet';
+// src/App.js
+import React, { useState, useEffect } from 'react';
+import {
+  MapContainer,
+  TileLayer,
+  CircleMarker,
+  Popup,
+  Tooltip,
+  useMap,
+} from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import styled from 'styled-components';
 
-const data = [
-  {
-    id: 1,
-    name: 'Area 1',
-    coords: [51.505, -0.09],
-    waterLevel: 2.5, // in meters
-  },
-  {
-    id: 2,
-    name: 'Area 2',
-    coords: [51.515, -0.1],
-    waterLevel: 3.2,
-  },
-  {
-    id: 3,
-    name: 'Area 3',
-    coords: [51.52, -0.12],
-    waterLevel: 1.8,
-  },
-  // Add more data as needed
-];
+// Fix for default icon images (optional but recommended)
+import iconUrl from 'leaflet/dist/images/marker-icon.png';
+import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
+import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
-const FullScreenMapWrapper = styled.div`
-  width: 100%;
-  height: 100vh; /* Full screen height */
-  position: relative;
-`;
+// Fix the default icon issue
+delete L.Icon.Default.prototype._getIconUrl;
 
-const Legend = styled.div`
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
-  padding: 20px; /* Increase padding for a larger legend */
-  border-radius: 8px; /* Increase border-radius for a smoother look */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  z-index: 1000; /* Ensure the legend stays above the map */
-  font-size: 16px; /* Increase font size */
-`;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+});
 
-const LegendItem = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px; /* Increase margin between items */
+// Legend component defined within the same file
+const Legend = ({ getColor }) => {
+  const map = useMap();
 
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const LegendColor = styled.span`
-  display: inline-block;
-  width: 30px; /* Increase width */
-  height: 30px; /* Increase height */
-  margin-right: 15px; /* Increase margin-right for spacing */
-  background-color: ${(props) => props.color};
-  border-radius: 5px; /* Increase border-radius for the color boxes */
-`;
-
-const WaterResource = () => {
   useEffect(() => {
-    window.scroll(0, 0);
+    const legend = L.control({ position: 'bottomright' });
+
+    legend.onAdd = function () {
+      const div = L.DomUtil.create('div', 'info legend');
+      const grades = [0, 10, 20, 30];
+      const labels = [];
+
+      // Loop through intervals to generate labels and colors
+      for (let i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+          '<i style="background:' +
+          getColor(grades[i] + 1) +
+          '"></i> ' +
+          grades[i] +
+          (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+      }
+
+      return div;
+    };
+
+    legend.addTo(map);
+
+    // Clean up the legend on component unmount
+    return () => {
+      legend.remove();
+    };
+  }, [map, getColor]);
+
+  return null;
+};
+
+function App() {
+  const [dataPoints, setDataPoints] = useState([]);
+
+  useEffect(() => {
+    // Generate 500 random data points
+    const randomData = generateRandomData(500);
+    setDataPoints(randomData);
   }, []);
+
+  // Function to generate random data points
+  const generateRandomData = (numPoints) => {
+    const data = [];
+
+    for (let i = 0; i < numPoints; i++) {
+      const latitude = Math.random() * 180 - 90; // Range: -90 to 90
+      const longitude = Math.random() * 360 - 180; // Range: -180 to 180
+      const value = Math.floor(Math.random() * 50); // Range: 0 to 49
+
+      data.push({ latitude, longitude, value });
+    }
+
+    return data;
+  };
+
+  // Function to determine marker color based on value
+  const getColor = (value) => {
+    if (value < 10) return '#f7fbff';
+    if (value < 20) return '#c6dbef';
+    if (value < 30) return '#6baed6';
+    return '#2171b5';
+  };
+
+  // CSS styles for the legend
+  const legendStyle = `
+    .info.legend {
+      background-color: white;
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      border-radius: 5px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+    .info.legend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+  `;
+
   return (
-    <FullScreenMapWrapper>
-      <MapContainer
-        center={[51.505, -0.09]}
-        zoom={13}
-        scrollWheelZoom={false}
-        style={{ height: '100%', width: '100%', position: 'relative', overflow: 'hidden' }} 
-      >
+    <div className="App">
+      <h1>Water Footprint Map Visualization</h1>
+      {/* Include legend styles */}
+      <style>{legendStyle}</style>
+      <MapContainer center={[0, 0]} zoom={2} style={{ height: '600px' }}>
+        {/* Map tiles */}
         <TileLayer
+          attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {data.map((location) => (
-          <Circle
-            key={location.id}
-            center={location.coords}
-            radius={location.waterLevel * 1000} // radius in meters (scaled by water level)
-            color={location.waterLevel > 3 ? 'red' : location.waterLevel > 2 ? 'orange' : 'green'}
-            fillOpacity={0.4}
+        {/* Render random data points */}
+        {dataPoints.map((point, idx) => (
+          <CircleMarker
+            key={idx}
+            center={[point.latitude, point.longitude]}
+            radius={3 + point.value * 0.2} // Adjust radius based on value
+            fillColor={getColor(point.value)}
+            color="#000"
+            weight={1}
+            opacity={1}
+            fillOpacity={0.8}
           >
             <Popup>
               <div>
-                <strong>{location.name}</strong>
-                <br />
-                Water Level: {location.waterLevel} meters
+                <strong>Value:</strong> {point.value}
               </div>
             </Popup>
-          </Circle>
+            <Tooltip direction="top" offset={[0, -10]} opacity={1}>
+              <span>Value: {point.value}</span>
+            </Tooltip>
+          </CircleMarker>
         ))}
+        {/* Add the legend to the map */}
+        <Legend getColor={getColor} />
       </MapContainer>
-
-      <Legend>
-        <h4>Water Level Legend</h4>
-        <LegendItem>
-          <LegendColor color="green" />
-          <span>Low (≤ 2 meters)</span>
-        </LegendItem>
-        <LegendItem>
-          <LegendColor color="orange" />
-          <span>Moderate (2 - 3 meters)</span>
-        </LegendItem>
-        <LegendItem>
-          <LegendColor color="red" />
-          <span>High (&gt; 3 meters)</span> {/* Escaped ">" character */}
-        </LegendItem>
-      </Legend>
-    </FullScreenMapWrapper>
+    </div>
   );
-};
+}
 
-export default WaterResource;
+export default App;

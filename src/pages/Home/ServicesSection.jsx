@@ -5,8 +5,8 @@ import cropSuggestionImg from "../../assets/images/cropPredhome.png";
 import diseaseClassificationImg from "../../assets/images/disease-classification.jpg";
 import waterResourceImg from "../../assets/images/water-resource.jpg";
 import chatBotImg from "../../assets/images/chatbot.jpg";
-import soilQualityTestingImg from "../../assets/images/water-resource.jpg"; // Add the correct image path
-import marketplaceImg from "../../assets/images/disease-classification.jpg";
+import soilQualityTestingImg from "../../assets/images/Soil testing.png"; // Add the correct image path
+import marketplaceImg from "../../assets/images/Marketplace.png";
 const ServicesSectionContainer = styled.section`
   padding: 80px 50px;
   background-color: #f5f5f5;
@@ -85,6 +85,40 @@ function ServicesSection() {
       <SectionSubtitle>Our Services</SectionSubtitle>
       <SectionTitle>What We Offer</SectionTitle>
       <ServicesGrid>
+        <ServiceCard to="/services/water-resource">
+          <ServiceImage
+            src={waterResourceImg}
+            alt="Water Resource Management"
+          />
+          <ServiceContent>
+            <ServiceTitle>Water Resource Management</ServiceTitle>
+            <ServiceDescription>
+              Stay informed about flood risks in your area with real-time water
+              level monitoring.
+            </ServiceDescription>
+            <ServiceIcon>
+              <i className="fas fa-water"></i>
+            </ServiceIcon>
+          </ServiceContent>
+        </ServiceCard>
+        <ServiceCard to="/services/soil-quality-testing">
+          <ServiceImage
+            src={soilQualityTestingImg}
+            alt="Soil Quality Testing"
+          />
+          <ServiceContent>
+            <ServiceTitle>Soil Quality Testing</ServiceTitle>
+            <ServiceDescription>
+              Measure and analyze soil conditions with our NPK sensor, providing
+              insights into nitrogen, phosphorus, potassium, pH, temperature,
+              and moisture levels. Get tailored crop suggestions based on your
+              soil data.
+            </ServiceDescription>
+            <ServiceIcon>
+              <i className="fas fa-leaf"></i>
+            </ServiceIcon>
+          </ServiceContent>
+        </ServiceCard>
         <ServiceCard to="/services/crop-suggestion">
           <ServiceImage src={cropSuggestionImg} alt="Crop Suggestion" />
           <ServiceContent>
@@ -118,23 +152,6 @@ function ServicesSection() {
           </ServiceContent>
         </ServiceCard>
 
-        <ServiceCard to="/services/water-resource">
-          <ServiceImage
-            src={waterResourceImg}
-            alt="Water Resource Management"
-          />
-          <ServiceContent>
-            <ServiceTitle>Water Resource Management</ServiceTitle>
-            <ServiceDescription>
-              Stay informed about flood risks in your area with real-time water
-              level monitoring.
-            </ServiceDescription>
-            <ServiceIcon>
-              <i className="fas fa-water"></i>
-            </ServiceIcon>
-          </ServiceContent>
-        </ServiceCard>
-
         <ServiceCard to="/services/chatbot">
           <ServiceImage src={chatBotImg} alt="ChatBot Assistance" />
           <ServiceContent>
@@ -149,24 +166,7 @@ function ServicesSection() {
         </ServiceCard>
 
         {/* New Soil Quality Testing Service */}
-        <ServiceCard to="/services/soil-quality-testing">
-          <ServiceImage
-            src={soilQualityTestingImg}
-            alt="Soil Quality Testing"
-          />
-          <ServiceContent>
-            <ServiceTitle>Soil Quality Testing</ServiceTitle>
-            <ServiceDescription>
-              Measure and analyze soil conditions with our NPK sensor, providing
-              insights into nitrogen, phosphorus, potassium, pH, temperature,
-              and moisture levels. Get tailored crop suggestions based on your
-              soil data.
-            </ServiceDescription>
-            <ServiceIcon>
-              <i className="fas fa-leaf"></i>
-            </ServiceIcon>
-          </ServiceContent>
-        </ServiceCard>
+
         <ServiceCard to="/services/marketplace">
           <ServiceImage src={marketplaceImg} alt="Marketplace" />
           <ServiceContent>
