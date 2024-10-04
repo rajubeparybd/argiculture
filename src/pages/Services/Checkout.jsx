@@ -39,7 +39,7 @@ const CheckoutButton = styled.button`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
-  }
+  }             
 `;
 
 function Checkout() {

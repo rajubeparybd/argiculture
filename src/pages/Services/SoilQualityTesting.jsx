@@ -1,6 +1,5 @@
 // src/components/SoilQualityTesting.jsx
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import {
   LineChart,
@@ -70,6 +69,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 48px;
+  padding-top:48px;
   color: ${colors.primary};
   margin-bottom: 10px;
   text-shadow: 2px 2px ${colors.accent};
@@ -498,7 +498,9 @@ function SoilQualityTesting() {
     phosphorus: data.phosphorus,
     potassium: data.potassium,
   }));
-
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <Container>
       <Title>
