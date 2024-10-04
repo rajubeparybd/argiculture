@@ -16,7 +16,7 @@ const fadeIn = keyframes`
 // Styled Components for Section
 const InitiativesSection = styled.section`
   display: flex;
-justify-content: space-between;
+justify-content: center;
   align-items: flex-start;
   padding: 60px 100px;
   background-color: #ffffff;
@@ -31,7 +31,7 @@ justify-content: space-between;
 
 const LeftContent = styled.div`
   max-width: 600px;
-  padding-right: 50px;
+  padding-right: 100px;
 
   @media (max-width: 768px) {
     text-align: center;

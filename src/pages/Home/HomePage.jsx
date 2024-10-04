@@ -16,12 +16,13 @@ function HomePage() {
       <section id="services">
         <ServicesSection />
       </section>
-      <section id="about">
-        <AboutUsSection />
-      </section>
       <section id="market">
         <SustainableInitiatives />
       </section>
+      <section id="about">
+        <AboutUsSection />
+      </section>
+
       <section id="farmers">
         <MeetOurFarmersSection />
       </section>
