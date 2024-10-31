@@ -13,6 +13,7 @@ import DiseaseClassification from './pages/Services/DiseaseClassification';
 import WaterResource from './pages/Services/WaterResource';
 import SoilQualityTesting from './pages/Services/SoilQualityTesting';
 import ChatBot from './pages/Services/ChatBot';
+import Hire from './pages/Services/hire';
 import ContactUsPage from './pages/ContactUs/ContactUsPage';
 import AboutUsDetail from './pages/AboutUs/AboutUsDetail';
 import Marketplace from './pages/Services/Marketplace';
@@ -41,6 +42,7 @@ function App() {
           <Route path="/services/disease-classification" element={<DiseaseClassification />} />
           <Route path="/services/water-resource" element={<WaterResource />} />
           <Route path="/services/chatbot" element={<ChatBot />} />
+          <Route path="/services/hire" element={<Hire />} />
           <Route path="/services/soil-quality-testing" element={<SoilQualityTesting />} />
           {/* New Marketplace Routes */}
           <Route path="/services/marketplace" element={<Marketplace />} />

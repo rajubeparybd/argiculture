@@ -165,6 +165,19 @@ function ServicesSection() {
           </ServiceContent>
         </ServiceCard>
 
+
+        <ServiceCard to="/services/hire">
+          <ServiceImage src={chatBotImg} alt="Hire" />
+          <ServiceContent>
+            <ServiceTitle>Hire</ServiceTitle>
+            <ServiceDescription>
+              Get real-time support and advice through our AI-powered ChatBot.
+            </ServiceDescription>
+            <ServiceIcon>
+              <i className="fas fa-robot"></i>
+            </ServiceIcon>
+          </ServiceContent>
+        </ServiceCard>
         {/* New Soil Quality Testing Service */}
 
         <ServiceCard to="/services/marketplace">

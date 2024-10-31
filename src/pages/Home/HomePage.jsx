@@ -23,9 +23,9 @@ function HomePage() {
         <AboutUsSection />
       </section>
 
-      <section id="farmers">
+      {/* <section id="farmers">
         <MeetOurFarmersSection />
-      </section>
+      </section> */}
       <section id="contact">
         <ContactUsSection />
       </section>
