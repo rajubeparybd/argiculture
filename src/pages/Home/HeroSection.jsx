@@ -1,6 +1,12 @@
-import styled from "styled-components";
+// src/pages/Services/HeroSection.jsx
+
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import videoBg from "../../assets/images/hero-video.mp4"; // Replace with the actual video path
+import videoBg from '../../assets/images/hero-video.mp4'; // Ensure the path is correct
+
+// Styled Components
 
 const HeroSectionContainer = styled.section`
   position: relative;
@@ -30,7 +36,7 @@ const VideoOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity here */
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
   z-index: 2;
 `;
 
@@ -39,6 +45,10 @@ const HeroTitle = styled.h1`
   margin-bottom: 20px;
   position: relative;
   z-index: 3;
+
+  @media (max-width: 768px) {
+    font-size: 45px;
+  }
 `;
 
 const HeroSubtitle = styled.p`
@@ -46,9 +56,17 @@ const HeroSubtitle = styled.p`
   margin-bottom: 50px;
   position: relative;
   z-index: 3;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+
+  span {
+    color: #27ae60; /* Highlight the dynamic text */
+  }
 `;
 
-const HeroButton = styled.button`
+const HeroButton = styled(Link)` /* Change from button to Link */
   background-color: #27ae60;
   color: #fff;
   padding: 15px 30px;
@@ -58,11 +76,20 @@ const HeroButton = styled.button`
   cursor: pointer;
   position: relative;
   z-index: 3;
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #219150;
   }
+
+  @media (max-width: 768px) {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
 `;
+
+// HeroSection Component
 
 function HeroSection() {
   const [text] = useTypewriter({
@@ -88,9 +115,9 @@ function HeroSection() {
       <HeroTitle>Unlock the Future of Farming</HeroTitle>
       <HeroSubtitle>
         Immerse Yourself in Interactive Tools for <span>{text}</span>
-        <Cursor />
+        <Cursor cursorStyle="|" />
       </HeroSubtitle>
-      <HeroButton to="/#services">Get Started</HeroButton>
+      <HeroButton to="/dashboard">Dashboard</HeroButton> {/* Updated navigation path */}
     </HeroSectionContainer>
   );
 }

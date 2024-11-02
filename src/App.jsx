@@ -17,6 +17,9 @@ import Hire from './pages/Services/hire';
 import ContactUsPage from './pages/ContactUs/ContactUsPage';
 import AboutUsDetail from './pages/AboutUs/AboutUsDetail';
 import Marketplace from './pages/Services/Marketplace';
+import Dashboard from './pages/Dashboard/dashboard';
+import Fertilizer from './pages/Services/Fertilizer';
+import CarbonFootprint from './pages/Services/CarbonFootprint';
 import MyPosts from './pages/Marketplace/MyPosts';
 // import  CartProvider from './context/CartContext';
 // import Checkout from './pages/Services/Checkout';
@@ -42,12 +45,15 @@ function App() {
           <Route path="/services/disease-classification" element={<DiseaseClassification />} />
           <Route path="/services/water-resource" element={<WaterResource />} />
           <Route path="/services/chatbot" element={<ChatBot />} />
+          <Route path="/services/fertilizer" element={<Fertilizer />} />
+          <Route path="/services/CarbonFootprint" element={<CarbonFootprint />} />
+
           <Route path="/services/hire" element={<Hire />} />
           <Route path="/services/soil-quality-testing" element={<SoilQualityTesting />} />
           {/* New Marketplace Routes */}
           <Route path="/services/marketplace" element={<Marketplace />} />
           <Route path="/services/my-posts" element={<MyPosts />} />
-          {/* <Route path="/services/checkout" element={<Checkout />} /> */}
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/about-us-detail" element={<AboutUsDetail />} />
           <Route path="*" element={<HomePage />} />

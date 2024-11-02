@@ -7,6 +7,10 @@ import waterResourceImg from "../../assets/images/water-resource.jpg";
 import chatBotImg from "../../assets/images/chatbot.jpg";
 import soilQualityTestingImg from "../../assets/images/Soil testing.png"; // Add the correct image path
 import marketplaceImg from "../../assets/images/Marketplace.png";
+import hireImg from "../../assets/images/hire.png";
+import carbonImg from "../../assets/images/carbon.jpg";
+import fertiImg from "../../assets/images/ferti.png";
+
 const ServicesSectionContainer = styled.section`
   padding: 80px 50px;
   background-color: #f5f5f5;
@@ -152,6 +156,44 @@ function ServicesSection() {
           </ServiceContent>
         </ServiceCard>
 
+        <ServiceCard to="/services/fertilizer">
+          <ServiceImage src={fertiImg} alt="Fertilizer" />
+          <ServiceContent>
+            <ServiceTitle>Fertilizer Suggestion</ServiceTitle>
+            <ServiceDescription>
+              To get the right fertilizer recommendation for your crops.
+            </ServiceDescription>
+            <ServiceIcon>
+              <i className="fas fa-robot"></i>
+            </ServiceIcon>
+          </ServiceContent>
+        </ServiceCard>
+
+        <ServiceCard to="/services/CarbonFootprint">
+          <ServiceImage src={carbonImg} alt="CarbonFootprint" />
+          <ServiceContent>
+            <ServiceTitle>Carbon Footprint Tracking</ServiceTitle>
+            <ServiceDescription>
+            Track your carbon emissions from Transportation, Industry, Residential and others.
+            </ServiceDescription>
+            <ServiceIcon>
+              <i className="fas fa-robot"></i>
+            </ServiceIcon>
+          </ServiceContent>
+        </ServiceCard>
+
+        <ServiceCard to="/services/hire">
+          <ServiceImage src={hireImg} alt="Hire" />
+          <ServiceContent>
+            <ServiceTitle>Hire</ServiceTitle>
+            <ServiceDescription>
+              Get real-time support and advice through our service.
+            </ServiceDescription>
+            <ServiceIcon>
+              <i className="fas fa-robot"></i>
+            </ServiceIcon>
+          </ServiceContent>
+        </ServiceCard>
         <ServiceCard to="/services/chatbot">
           <ServiceImage src={chatBotImg} alt="ChatBot Assistance" />
           <ServiceContent>
@@ -164,21 +206,6 @@ function ServicesSection() {
             </ServiceIcon>
           </ServiceContent>
         </ServiceCard>
-
-
-        <ServiceCard to="/services/hire">
-          <ServiceImage src={chatBotImg} alt="Hire" />
-          <ServiceContent>
-            <ServiceTitle>Hire</ServiceTitle>
-            <ServiceDescription>
-              Get real-time support and advice through our AI-powered ChatBot.
-            </ServiceDescription>
-            <ServiceIcon>
-              <i className="fas fa-robot"></i>
-            </ServiceIcon>
-          </ServiceContent>
-        </ServiceCard>
-        {/* New Soil Quality Testing Service */}
 
         <ServiceCard to="/services/marketplace">
           <ServiceImage src={marketplaceImg} alt="Marketplace" />
