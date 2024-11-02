@@ -6,9 +6,8 @@ import { getDatabase, ref, onValue, set } from "firebase/database";
 const App = () => {
   // Static Farm Details
   const farmDetails = {
-    name: "Kumar Farms & Plantation",
+    name: "Mahin's Farms & Plantation",
     id: "MYS-FRM-1",
-    location: "Mysuru",
     landArea: "4.5 acres",
     numberOfCrops: 3,
     previousYield: "26 tonnes",
