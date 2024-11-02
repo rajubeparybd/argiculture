@@ -1,13 +1,16 @@
 // src/components/Marketplace/CropSuggestion.jsx
+
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FaTimes } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import leftSectionImg from "../../assets/images/crop-suggestion-inside.jpg";
 import axios from "axios";
 
 // Import images
+import leftSectionImg from "../../assets/images/crop-suggestion-inside.jpg";
+
+// Summer Crops Images
 import Bell_pepper from "../../assets/images/crops/summer/Bell_pepper.jpg";
 import Carrot from "../../assets/images/crops/summer/Carrot.jpg";
 import Wheat from "../../assets/images/crops/summer/Wheat.jpg";
@@ -18,16 +21,20 @@ import Green_Bean from "../../assets/images/crops/summer/Green_Bean.jpg";
 import Eggplant from "../../assets/images/crops/summer/Eggplant.jpg";
 import Cucumber from "../../assets/images/crops/summer/Cucumber.jpg";
 import Corn from "../../assets/images/crops/summer/Corn.jpg";
+
+// Rainy Crops Images
 import Black_gram from "../../assets/images/crops/rainy/Black_gram.jpg";
 import Sugarcane from "../../assets/images/crops/rainy/Sugarcane.jpg";
 import Soybeans from "../../assets/images/crops/rainy/Soybeans.jpg";
 import Rice from "../../assets/images/crops/rainy/Rice.jpg";
 import Pumpkins from "../../assets/images/crops/rainy/Pumpkins.jpg";
-import Papaya from "../../assets/images/crops/rainy/papaya.jpg";
+import Papaya from "../../assets/images/crops/rainy/Papaya.jpg";
 import Mustard from "../../assets/images/crops/rainy/Mustard.jpg";
 import Mung_beans from "../../assets/images/crops/rainy/Mung_beans.jpg";
-import Jute from "../../assets/images/crops/rainy/jute.jpg";
-import chana from "../../assets/images/crops/rainy/chana.jpg";
+import Jute from "../../assets/images/crops/rainy/Jute.jpg";
+import Chana from "../../assets/images/crops/rainy/Chana.jpg";
+
+// Winter Crops Images
 import Turnip from "../../assets/images/crops/winter/Turnip.jpg";
 import Radish from "../../assets/images/crops/winter/Radish.jpg";
 import Leek from "../../assets/images/crops/winter/Leek.jpg";
@@ -38,9 +45,6 @@ import Cauliflower from "../../assets/images/crops/winter/Cauliflower.jpg";
 import Cabbage from "../../assets/images/crops/winter/Cabbage.jpg";
 import Broccoli from "../../assets/images/crops/winter/Broccoli.jpg";
 import Beet from "../../assets/images/crops/winter/Beet.jpg";
-
-
-// ... import images for all crops
 
 // Create a mapping of crop names to images
 const cropImages = {
@@ -64,7 +68,7 @@ const cropImages = {
   Mustard: Mustard,
   Mung_beans: Mung_beans,
   Jute: Jute,
-  Okra: chana,
+  Okra: Chana, // Corrected mapping: Okra mapped to Chana image
 
   Radish: Radish,
   Turnip: Turnip,
@@ -77,6 +81,8 @@ const cropImages = {
   Beet: Beet,
   Leafy_Lettuce: Leafy_Lettuce,
 };
+
+// Styled Components
 
 const HeroSection = styled.section`
   display: flex;
@@ -378,6 +384,173 @@ const CropName = styled.h4`
   }
 `;
 
+// Mock Data Categorized by Season
+const mockSuggestions = [
+  // Winter Crops (November to February)
+  {
+    name: "Carrot",
+    season: "Winter",
+  },
+  {
+    name: "Turnip",
+    season: "Winter",
+  },
+  {
+    name: "Radish",
+    season: "Winter",
+  },
+  {
+    name: "Leek",
+    season: "Winter",
+  },
+  {
+    name: "Leafy_Lettuce",
+    season: "Winter",
+  },
+  {
+    name: "Green_Onion",
+    season: "Winter",
+  },
+  {
+    name: "Collard",
+    season: "Winter",
+  },
+  {
+    name: "Cauliflower",
+    season: "Winter",
+  },
+  {
+    name: "Cabbage",
+    season: "Winter",
+  },
+  {
+    name: "Broccoli",
+    season: "Winter",
+  },
+  {
+    name: "Beet",
+    season: "Winter",
+  },
+
+  // Summer Crops (March to June)
+  {
+    name: "Bell_Pepper",
+    season: "Summer",
+  },
+  {
+    name: "Watermelon",
+    season: "Summer",
+  },
+  {
+    name: "Tomato",
+    season: "Summer",
+  },
+  {
+    name: "Potato",
+    season: "Summer",
+  },
+  {
+    name: "Green_Bean",
+    season: "Summer",
+  },
+  {
+    name: "Eggplant",
+    season: "Summer",
+  },
+  {
+    name: "Cucumber",
+    season: "Summer",
+  },
+  {
+    name: "Corn",
+    season: "Summer",
+  },
+
+  // Rainy Crops (July to October)
+  {
+    name: "Wheat",
+    season: "Rainy",
+  },
+  {
+    name: "Black_gram",
+    season: "Rainy",
+  },
+  {
+    name: "Sugarcane",
+    season: "Rainy",
+  },
+  {
+    name: "Soybeans",
+    season: "Rainy",
+  },
+  {
+    name: "Rice",
+    season: "Rainy",
+  },
+  {
+    name: "Pumpkin",
+    season: "Rainy",
+  },
+  {
+    name: "Papaya",
+    season: "Rainy",
+  },
+  {
+    name: "Mustard",
+    season: "Rainy",
+  },
+  {
+    name: "Mung_beans",
+    season: "Rainy",
+  },
+  {
+    name: "Jute",
+    season: "Rainy",
+  },
+  {
+    name: "Chana",
+    season: "Rainy",
+  },
+  // Add more mock crops as needed
+];
+
+// Function to Determine Seasons from Date Range
+const getSeasonsFromDateRange = (startDate, endDate) => {
+  const seasons = new Set();
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  // Ensure start <= end
+  if (start > end) {
+    return seasons; // Empty set
+  }
+
+  // Iterate through each month in the date range
+  let current = new Date(start.getFullYear(), start.getMonth(), 1);
+
+  while (current <= end) {
+    const month = current.getMonth() + 1; // Months are 0-indexed
+    let season = "";
+
+    if (month === 11 || month === 12 || month === 1 || month === 2) {
+      season = "Winter";
+    } else if (month >= 3 && month <= 6) {
+      season = "Summer";
+    } else if (month >= 7 && month <= 10) {
+      season = "Rainy";
+    }
+
+    if (season) {
+      seasons.add(season);
+    }
+
+    // Move to the next month
+    current.setMonth(current.getMonth() + 1);
+  }
+
+  return Array.from(seasons);
+};
+
 // CropSuggestion Component
 
 function CropSuggestion() {
@@ -404,33 +577,37 @@ function CropSuggestion() {
 
   const handleGetSuggestions = async () => {
     if (startDate && endDate) {
+      if (startDate > endDate) {
+        alert("Start date cannot be after end date.");
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
 
-      // Format dates to 'YYYY-MM-DD' for the API
-      const formattedStartDate = startDate.toISOString().split("T")[0];
-      const formattedEndDate = endDate.toISOString().split("T")[0];
+      // Determine the seasons based on selected dates
+      const selectedSeasons = getSeasonsFromDateRange(startDate, endDate);
 
-      try {
-        const response = await axios.post(
-          "http://localhost:8000/api/suggest_crops",
-          {
-            start_date: formattedStartDate,
-            end_date: formattedEndDate,
-          }
+      if (selectedSeasons.length === 0) {
+        setError("No valid seasons found for the selected dates.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Simulate API call with mock data
+      setTimeout(() => {
+        // Filter mockSuggestions based on selectedSeasons
+        const filteredSuggestions = mockSuggestions.filter((crop) =>
+          selectedSeasons.includes(crop.season)
         );
 
-        setSuggestions(response.data);
+        setSuggestions(filteredSuggestions);
         setIsLoading(false);
 
         if (suggestionsRef.current) {
           suggestionsRef.current.scrollIntoView({ behavior: "smooth" });
         }
-      } catch (err) {
-        console.error("Error fetching suggestions:", err);
-        setError("Failed to fetch crop suggestions. Please try again.");
-        setIsLoading(false);
-      }
+      }, 1500); // Simulate network delay
     } else {
       alert("Please select both start and end dates.");
     }
@@ -478,7 +655,7 @@ function CropSuggestion() {
               />
             </DatePickerWrapper>
             <SuggestButton onClick={handleGetSuggestions}>
-              Get Suggestion
+              {isLoading ? "Fetching..." : "Get Suggestion"}
             </SuggestButton>
           </RightSection>
         </HeroCard>
@@ -487,18 +664,24 @@ function CropSuggestion() {
       <SuggestionsContainer ref={suggestionsRef}>
         {isLoading && <p>Loading suggestions...</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
+        {!isLoading && !error && suggestions.length === 0 && (
+          <p>No crop suggestions available for the selected dates.</p>
+        )}
         {suggestions.length > 0 && (
-          <SuggestionsGrid>
-            {suggestions.map((crop, index) => (
-              <CropCard key={index}>
-                {crop.name in cropImages && (
-                  <CropImage src={cropImages[crop.name]} alt={crop.name} />
-                )}
-                <CropName>{crop.name}</CropName>
-                <p>Season: {crop.season}</p>
-              </CropCard>
-            ))}
-          </SuggestionsGrid>
+          <div>
+            <h2>Recommended Crops:</h2>
+            <SuggestionsGrid>
+              {suggestions.map((crop, index) => (
+                <CropCard key={index}>
+                  {crop.name in cropImages && (
+                    <CropImage src={cropImages[crop.name]} alt={crop.name} />
+                  )}
+                  <CropName>{crop.name.replace(/_/g, " ")}</CropName>
+                  <p>Season: {crop.season}</p>
+                </CropCard>
+              ))}
+            </SuggestionsGrid>
+          </div>
         )}
       </SuggestionsContainer>
 
@@ -508,7 +691,7 @@ function CropSuggestion() {
             <FaTimes />
           </CloseButton>
           <h2>Select Location</h2>
-          {/* You can implement location selection here */}
+          {/* Implement location selection here */}
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48351.20274640604!2d-0.13556838164659784!3d51.50767871089981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b3339e45f3d%3A0xd19d91f58c6c1d45!2sLondon%20Eye!5e0!3m2!1sen!2suk!4v1614088778474!5m2!1sen!2suk"
             width="100%"
