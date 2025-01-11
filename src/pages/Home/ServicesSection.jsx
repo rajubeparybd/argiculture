@@ -8,7 +8,7 @@ import chatBotImg from "../../assets/images/chatbot.jpg";
 import soilQualityTestingImg from "../../assets/images/Soil testing.png"; // Add the correct image path
 import marketplaceImg from "../../assets/images/Marketplace.png";
 import hireImg from "../../assets/images/hire.png";
-import carbonImg from "../../assets/images/carbon.jpg";
+// import carbonImg from "../../assets/images/carbon.jpg";
 import fertiImg from "../../assets/images/ferti.png";
 
 const ServicesSectionContainer = styled.section`
@@ -169,7 +169,7 @@ function ServicesSection() {
           </ServiceContent>
         </ServiceCard>
 
-        <ServiceCard to="/services/CarbonFootprint">
+        {/* <ServiceCard to="/services/CarbonFootprint">
           <ServiceImage src={carbonImg} alt="CarbonFootprint" />
           <ServiceContent>
             <ServiceTitle>Carbon Footprint Tracking</ServiceTitle>
@@ -180,7 +180,7 @@ function ServicesSection() {
               <i className="fas fa-robot"></i>
             </ServiceIcon>
           </ServiceContent>
-        </ServiceCard>
+        </ServiceCard> */}
 
         <ServiceCard to="/services/hire">
           <ServiceImage src={hireImg} alt="Hire" />
