@@ -6,6 +6,6 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-  base: "/argiculture/",
+  base: process.env.VITE_BASE_URL || "/argiculture/",
   plugins: [react()],
 });
