@@ -28,7 +28,7 @@ import Sugarcane from "../../assets/images/crops/rainy/Sugarcane.jpg";
 import Soybeans from "../../assets/images/crops/rainy/Soybeans.jpg";
 import Rice from "../../assets/images/crops/rainy/Rice.jpg";
 import Pumpkins from "../../assets/images/crops/rainy/Pumpkins.jpg";
-import Papaya from "../../assets/images/crops/rainy/Papaya.jpg";
+import Papaya from "../../assets/images/crops/rainy/papaya.jpg";
 import Mustard from "../../assets/images/crops/rainy/Mustard.jpg";
 import Mung_beans from "../../assets/images/crops/rainy/Mung_beans.jpg";
 import Jute from "../../assets/images/crops/rainy/Jute.jpg";
