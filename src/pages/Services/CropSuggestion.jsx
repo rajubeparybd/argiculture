@@ -31,8 +31,8 @@ import Pumpkins from "../../assets/images/crops/rainy/Pumpkins.jpg";
 import Papaya from "../../assets/images/crops/rainy/papaya.jpg";
 import Mustard from "../../assets/images/crops/rainy/Mustard.jpg";
 import Mung_beans from "../../assets/images/crops/rainy/Mung_beans.jpg";
-import Jute from "../../assets/images/crops/rainy/Jute.jpg";
-import Chana from "../../assets/images/crops/rainy/Chana.jpg";
+import Jute from "../../assets/images/crops/rainy/jute.jpg";
+import Chana from "../../assets/images/crops/rainy/chana.jpg";
 
 // Winter Crops Images
 import Turnip from "../../assets/images/crops/winter/Turnip.jpg";
